@@ -48,8 +48,16 @@
                  #_(merge {:messages (db/get-messages)}
                         (select-keys flash [:name]))))
 
+(defn user-page [user]
+  (let [_ (log/info "get-messages:" (filter #(= (str user) (:name %)) (db/get-messages)))]
+    [_ (log/info "user:" user)])
+  (layout/render "user-page.html"
+                 {:messages (filter #(= (str user) (:name %)) (db/get-messages))})
+  )
+
 (defroutes home-routes
   (GET "/" request (home-page request))
   (POST "/" request (save-message! request))
   (GET "/user" request (user-list request))
+  (GET "/user/:user" [user] (user-page user))
   (GET "/about" [] (about-page)))
