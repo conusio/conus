@@ -1,0 +1,106 @@
+2017-08-30 10:12:24,551 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m45s716ms). 
+2017-08-30 10:35:17,531 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m22s943ms). 
+2017-08-30 10:40:34,886 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m47s302ms). 
+2017-08-30 10:45:09,040 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m34s153ms). 
+2017-08-30 10:50:23,721 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m43s843ms). 
+2017-08-30 10:51:48,811 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m25s89ms). 
+2017-08-30 10:59:37,661 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m18s809ms). 
+2017-08-30 11:09:41,491 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m3s832ms). 
+2017-08-30 12:11:42,734 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m29s919ms). 
+2017-08-30 13:18:50,982 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m37s885ms). 
+2017-08-30 13:22:57,794 [XNIO-1 task-21] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 13:22:57,797 [XNIO-1 task-21] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 13:36:50,216 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m29s71ms). 
+2017-08-30 13:38:40,225 [XNIO-1 task-24] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 13:38:40,226 [XNIO-1 task-24] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 13:46:28,751 [XNIO-1 task-28] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 13:46:28,753 [XNIO-1 task-28] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 13:46:28,852 [XNIO-1 task-28] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 13:46:28,852 [XNIO-1 task-28] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 13:46:42,253 [XNIO-1 task-11] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 13:46:42,253 [XNIO-1 task-11] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 14:12:19,282 [XNIO-1 task-6] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 14:12:19,288 [XNIO-1 task-6] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 14:12:35,528 [XNIO-1 task-21] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 14:12:35,529 [XNIO-1 task-21] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 14:13:02,033 [XNIO-1 task-12] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 14:13:02,034 [XNIO-1 task-12] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 14:13:10,911 [XNIO-1 task-28] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 14:13:10,912 [XNIO-1 task-28] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 14:14:10,764 [XNIO-1 task-13] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 14:14:10,765 [XNIO-1 task-13] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 14:14:59,986 [XNIO-1 task-18] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 14:14:59,986 [XNIO-1 task-18] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 14:15:40,470 [XNIO-1 task-32] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 14:15:40,471 [XNIO-1 task-32] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 14:19:20,181 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m17s649ms). 
+2017-08-30 14:20:42,235 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m22s54ms). 
+2017-08-30 14:23:45,475 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m3s240ms). 
+2017-08-30 14:28:15,771 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m30s296ms). 
+2017-08-30 14:35:35,760 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m19s929ms). 
+2017-08-30 16:41:15,515 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h5m39s756ms). 
+2017-08-30 16:42:42,438 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=56s914ms). 
+2017-08-30 16:44:03,346 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=50s903ms). 
+2017-08-30 16:44:32,621 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Retrograde clock change detected (housekeeper delta=29s275ms), soft-evicting connections from pool. 
+2017-08-30 16:45:35,923 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m3s302ms). 
+2017-08-30 17:17:05,228 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=31m29s305ms). 
+2017-08-30 17:39:08,587 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m3s114ms). 
+2017-08-30 17:42:35,537 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m56s892ms). 
+2017-08-30 17:43:20,329 [XNIO-1 task-7] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 17:43:20,330 [XNIO-1 task-7] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 17:45:23,470 [XNIO-1 task-24] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 17:45:23,471 [XNIO-1 task-24] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 17:45:32,437 [XNIO-1 task-16] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 17:45:32,437 [XNIO-1 task-16] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 17:49:50,983 [XNIO-1 task-13] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 17:49:50,984 [XNIO-1 task-13] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 17:50:15,253 [XNIO-1 task-10] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 17:50:15,254 [XNIO-1 task-10] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 17:51:59,183 [main] DEBUG org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider 
+2017-08-30 17:52:31,660 [main] DEBUG org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider 
+2017-08-30 17:55:56,542 [XNIO-1 task-9] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 17:55:56,546 [XNIO-1 task-9] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 17:56:29,366 [XNIO-1 task-6] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-30 17:56:29,366 [XNIO-1 task-6] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-30 18:30:13,006 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=29m7s334ms). 
+2017-08-30 20:18:26,978 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h47m43s907ms). 
+2017-08-30 21:01:39,072 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=43m12s94ms). 
+2017-08-30 22:49:42,536 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h48m3s233ms). 

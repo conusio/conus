@@ -1,0 +1,113 @@
+2017-08-31 00:38:24,916 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h44m12s291ms). 
+2017-08-31 02:26:28,798 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h48m3s887ms). 
+2017-08-31 04:14:31,715 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h48m2s919ms). 
+2017-08-31 06:02:16,371 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h47m44s652ms). 
+2017-08-31 11:50:48,224 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5h48m31s856ms). 
+2017-08-31 12:07:34,502 [XNIO-1 task-5] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 12:07:34,505 [XNIO-1 task-5] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 12:07:37,911 [XNIO-1 task-28] INFO  guestbook.routes.home - nil 
+2017-08-31 12:08:51,652 [XNIO-1 task-11] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 12:08:51,653 [XNIO-1 task-11] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 12:08:51,973 [XNIO-1 task-11] INFO  guestbook.routes.home - flash: nil 
+2017-08-31 12:14:38,816 [XNIO-1 task-29] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 12:14:38,818 [XNIO-1 task-29] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 12:14:38,930 [XNIO-1 task-29] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 12:14:38,931 [XNIO-1 task-29] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 12:14:39,043 [XNIO-1 task-29] INFO  guestbook.routes.home - poo: {:ssl-client-cert nil, :cookies {CSRF-Token-C4ZWD {:value SKuKKkzheJjKyvMqyJDRscED7Q6m3SMZ}, firstVisit {:value 1502478406780}, JSESSIONID {:value UT268jklAAITmWrbg2vBlEWlfyS0ex6zFRvwDZIv}}, :remote-addr 0:0:0:0:0:0:0:1, :params {}, :flash nil, :handler-type :undertow, :route-handler #object[compojure.core$make_route$fn__2072 0x154721d compojure.core$make_route$fn__2072@154721d], :route-params {}, :headers {host localhost:3000, user-agent Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36, cookie CSRF-Token-C4ZWD=SKuKKkzheJjKyvMqyJDRscED7Q6m3SMZ; firstVisit=1502478406780; JSESSIONID=UT268jklAAITmWrbg2vBlEWlfyS0ex6zFRvwDZIv, connection keep-alive, upgrade-insecure-requests 1, accept text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8, accept-language en-US,en;q=0.8, accept-encoding gzip, deflate, br, cache-control max-age=0}, :server-port 3000, :content-length -1, :form-params {}, :compojure/route [:get /user], :server-exchange #object[io.undertow.server.HttpServerExchange 0x41b057ab HttpServerExchange{ GET /user request {Accept=[text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8], Accept-Language=[en-US,en;q=0.8], Cache-Control=[max-age=0], Accept-Encoding=[gzip, deflate, br], User-Agent=[Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36], Connection=[keep-alive], Cookie=[CSRF-Token-C4ZWD=SKuKKkzheJjKyvMqyJDRscED7Q6m3SMZ; firstVisit=1502478406780; JSESSIONID=UT268jklAAITmWrbg2vBlEWlfyS0ex6zFRvwDZIv], Upgrade-Insecure-Requests=[1], Host=[localhost:3000]} response {Server=[undertow]}}], :query-params {}, :content-type nil, :path-info /user, :character-encoding nil, :context , :uri /user, :server-name localhost, :query-string nil, :body #object[io.undertow.io.UndertowInputStream 0x7578336e io.undertow.io.UndertowInputStream@7578336e], :multipart-params {}, :scheme :http, :request-method :get, :route-middleware #object[clojure.core$comp$fn__4727 0x280432d3 clojure.core$comp$fn__4727@280432d3], :session {:ring.middleware.anti-forgery/anti-forgery-token UShnUBzOLb2+ilvXKIHNUEl/Q/0vO63VWUautYzOk1fdAW4ytvNrAi5ZB2hnFkYpOad0D0hHbzYvzylI}} 
+2017-08-31 12:18:01,643 [XNIO-1 task-3] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 12:18:01,644 [XNIO-1 task-3] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 12:18:06,196 [XNIO-1 task-10] INFO  guestbook.routes.home - poo: {:ssl-client-cert nil, :cookies {CSRF-Token-C4ZWD {:value SKuKKkzheJjKyvMqyJDRscED7Q6m3SMZ}, firstVisit {:value 1502478406780}, JSESSIONID {:value UT268jklAAITmWrbg2vBlEWlfyS0ex6zFRvwDZIv}}, :remote-addr 0:0:0:0:0:0:0:1, :params {}, :flash nil, :handler-type :undertow, :route-handler #object[compojure.core$make_route$fn__2072 0x15bb11fe compojure.core$make_route$fn__2072@15bb11fe], :route-params {}, :headers {connection keep-alive, accept text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8, accept-language en-US,en;q=0.8, accept-encoding gzip, deflate, br, cookie CSRF-Token-C4ZWD=SKuKKkzheJjKyvMqyJDRscED7Q6m3SMZ; firstVisit=1502478406780; JSESSIONID=UT268jklAAITmWrbg2vBlEWlfyS0ex6zFRvwDZIv, user-agent Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36, upgrade-insecure-requests 1, host localhost:3000}, :server-port 3000, :content-length -1, :form-params {}, :compojure/route [:get /user], :server-exchange #object[io.undertow.server.HttpServerExchange 0x184344fc HttpServerExchange{ GET /user request {Connection=[keep-alive], Accept=[text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8], Accept-Language=[en-US,en;q=0.8], Accept-Encoding=[gzip, deflate, br], Cookie=[CSRF-Token-C4ZWD=SKuKKkzheJjKyvMqyJDRscED7Q6m3SMZ; firstVisit=1502478406780; JSESSIONID=UT268jklAAITmWrbg2vBlEWlfyS0ex6zFRvwDZIv], User-Agent=[Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36], Upgrade-Insecure-Requests=[1], Host=[localhost:3000]} response {Server=[undertow]}}], :query-params {}, :content-type nil, :path-info /user, :character-encoding nil, :context , :uri /user, :server-name localhost, :query-string nil, :body #object[io.undertow.io.UndertowInputStream 0x3ef2fa79 io.undertow.io.UndertowInputStream@3ef2fa79], :multipart-params {}, :scheme :http, :request-method :get, :route-middleware #object[clojure.core$comp$fn__4727 0x26ef51c9 clojure.core$comp$fn__4727@26ef51c9], :session {:ring.middleware.anti-forgery/anti-forgery-token UShnUBzOLb2+ilvXKIHNUEl/Q/0vO63VWUautYzOk1fdAW4ytvNrAi5ZB2hnFkYpOad0D0hHbzYvzylI}} get-messages: ({:id 1, :name elliott, :message this is a test, :timestamp #inst "2017-08-29T20:19:27.978000000-00:00"} {:id 2, :name matt, :message another test, :timestamp #inst "2017-08-29T20:19:33.870000000-00:00"} {:id 3, :name stupid, :message thisi s stupid, :timestamp #inst "2017-08-29T20:22:01.836000000-00:00"} {:id 4, :name this, :message thiat stsignsdnk
+, :timestamp #inst "2017-08-29T20:26:58.876000000-00:00"} {:id 5, :name sfdsfd, :message sfdsfsdfdsf;jsdf sdfdsfsdffsd, :timestamp #inst "2017-08-29T20:27:13.866000000-00:00"} {:id 6, :name erlliot, :message aslfkjsdkfjsdjkfsd
+, :timestamp #inst "2017-08-29T20:40:22.562000000-00:00"} {:id 33, :name newperson, :message newpersonnewperson, :timestamp #inst "2017-08-30T21:43:54.766000000-00:00"} {:id 34, :name elliott, :message another elliott thing, :timestamp #inst "2017-08-30T21:45:54.603000000-00:00"}) 
+2017-08-31 12:26:58,022 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m39s566ms). 
+2017-08-31 12:31:38,637 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m10s580ms). 
+2017-08-31 12:51:07,907 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m59s152ms). 
+2017-08-31 12:52:30,530 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=52s617ms). 
+2017-08-31 13:00:20,008 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m19s470ms). 
+2017-08-31 13:23:37,317 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m17s255ms). 
+2017-08-31 13:36:13,274 [XNIO-1 task-14] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 13:36:13,279 [XNIO-1 task-14] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 13:36:13,438 [XNIO-1 task-14] INFO  guestbook.routes.home - get-messages: ({:id 1, :name elliott, :message this is a test, :timestamp #inst "2017-08-29T20:19:27.978000000-00:00"} {:id 2, :name matt, :message another test, :timestamp #inst "2017-08-29T20:19:33.870000000-00:00"} {:id 3, :name stupid, :message thisi s stupid, :timestamp #inst "2017-08-29T20:22:01.836000000-00:00"} {:id 4, :name this, :message thiat stsignsdnk
+, :timestamp #inst "2017-08-29T20:26:58.876000000-00:00"} {:id 5, :name sfdsfd, :message sfdsfsdfdsf;jsdf sdfdsfsdffsd, :timestamp #inst "2017-08-29T20:27:13.866000000-00:00"} {:id 6, :name erlliot, :message aslfkjsdkfjsdjkfsd
+, :timestamp #inst "2017-08-29T20:40:22.562000000-00:00"} {:id 33, :name newperson, :message newpersonnewperson, :timestamp #inst "2017-08-30T21:43:54.766000000-00:00"} {:id 34, :name elliott, :message another elliott thing, :timestamp #inst "2017-08-30T21:45:54.603000000-00:00"}) 
+2017-08-31 13:37:31,829 [XNIO-1 task-2] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 13:37:31,830 [XNIO-1 task-2] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 13:37:31,908 [XNIO-1 task-2] INFO  guestbook.routes.home - get-messages: (elliott matt stupid this sfdsfd erlliot newperson elliott) 
+2017-08-31 13:38:09,744 [XNIO-1 task-6] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 13:38:09,744 [XNIO-1 task-6] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 13:38:09,848 [XNIO-1 task-6] INFO  guestbook.routes.home - get-messages: (elliott matt stupid this sfdsfd erlliot newperson) 
+2017-08-31 13:44:11,270 [XNIO-1 task-26] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 13:44:11,272 [XNIO-1 task-26] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 13:44:11,344 [XNIO-1 task-26] INFO  guestbook.routes.home - get-messages: (elliott matt stupid this sfdsfd erlliot newperson) 
+2017-08-31 13:44:40,500 [XNIO-1 task-30] INFO  guestbook.routes.home - get-messages: (elliott matt stupid this sfdsfd erlliot newperson) 
+2017-08-31 13:49:34,966 [XNIO-1 task-16] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 13:49:34,969 [XNIO-1 task-16] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 13:49:35,196 [XNIO-1 task-16] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 13:49:35,196 [XNIO-1 task-16] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 13:49:35,288 [XNIO-1 task-16] INFO  guestbook.routes.home - get-messages: ({:id 1, :name elliott, :message this is a test, :timestamp #inst "2017-08-29T20:19:27.978000000-00:00"} {:id 2, :name matt, :message another test, :timestamp #inst "2017-08-29T20:19:33.870000000-00:00"} {:id 3, :name stupid, :message thisi s stupid, :timestamp #inst "2017-08-29T20:22:01.836000000-00:00"} {:id 4, :name this, :message thiat stsignsdnk
+, :timestamp #inst "2017-08-29T20:26:58.876000000-00:00"} {:id 5, :name sfdsfd, :message sfdsfsdfdsf;jsdf sdfdsfsdffsd, :timestamp #inst "2017-08-29T20:27:13.866000000-00:00"} {:id 6, :name erlliot, :message aslfkjsdkfjsdjkfsd
+, :timestamp #inst "2017-08-29T20:40:22.562000000-00:00"} {:id 33, :name newperson, :message newpersonnewperson, :timestamp #inst "2017-08-30T21:43:54.766000000-00:00"} {:id 34, :name elliott, :message another elliott thing, :timestamp #inst "2017-08-30T21:45:54.603000000-00:00"}) 
+2017-08-31 13:50:28,691 [XNIO-1 task-17] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 13:50:28,693 [XNIO-1 task-17] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 13:50:28,789 [XNIO-1 task-17] INFO  guestbook.routes.home - get-messages: {:messages ({:id 1, :name elliott, :message this is a test, :timestamp #inst "2017-08-29T20:19:27.978000000-00:00"} {:id 2, :name matt, :message another test, :timestamp #inst "2017-08-29T20:19:33.870000000-00:00"} {:id 3, :name stupid, :message thisi s stupid, :timestamp #inst "2017-08-29T20:22:01.836000000-00:00"} {:id 4, :name this, :message thiat stsignsdnk
+, :timestamp #inst "2017-08-29T20:26:58.876000000-00:00"} {:id 5, :name sfdsfd, :message sfdsfsdfdsf;jsdf sdfdsfsdffsd, :timestamp #inst "2017-08-29T20:27:13.866000000-00:00"} {:id 6, :name erlliot, :message aslfkjsdkfjsdjkfsd
+, :timestamp #inst "2017-08-29T20:40:22.562000000-00:00"} {:id 33, :name newperson, :message newpersonnewperson, :timestamp #inst "2017-08-30T21:43:54.766000000-00:00"} {:id 34, :name elliott, :message another elliott thing, :timestamp #inst "2017-08-30T21:45:54.603000000-00:00"})} 
+2017-08-31 13:51:10,869 [XNIO-1 task-32] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 13:51:10,869 [XNIO-1 task-32] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 13:51:11,023 [XNIO-1 task-32] INFO  guestbook.routes.home - get-messages: {:messages ({:id 1, :name elliott, :message this is a test, :timestamp #inst "2017-08-29T20:19:27.978000000-00:00"} {:id 2, :name matt, :message another test, :timestamp #inst "2017-08-29T20:19:33.870000000-00:00"} {:id 3, :name stupid, :message thisi s stupid, :timestamp #inst "2017-08-29T20:22:01.836000000-00:00"} {:id 4, :name this, :message thiat stsignsdnk
+, :timestamp #inst "2017-08-29T20:26:58.876000000-00:00"} {:id 5, :name sfdsfd, :message sfdsfsdfdsf;jsdf sdfdsfsdffsd, :timestamp #inst "2017-08-29T20:27:13.866000000-00:00"} {:id 6, :name erlliot, :message aslfkjsdkfjsdjkfsd
+, :timestamp #inst "2017-08-29T20:40:22.562000000-00:00"} {:id 33, :name newperson, :message newpersonnewperson, :timestamp #inst "2017-08-30T21:43:54.766000000-00:00"} {:id 34, :name elliott, :message another elliott thing, :timestamp #inst "2017-08-30T21:45:54.603000000-00:00"})} 
+2017-08-31 13:53:44,242 [XNIO-1 task-12] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 13:53:44,242 [XNIO-1 task-12] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 13:53:44,399 [XNIO-1 task-12] INFO  guestbook.routes.home - get-messages: ({:id 1, :name elliott, :message this is a test, :timestamp #inst "2017-08-29T20:19:27.978000000-00:00"} {:id 2, :name matt, :message another test, :timestamp #inst "2017-08-29T20:19:33.870000000-00:00"} {:id 3, :name stupid, :message thisi s stupid, :timestamp #inst "2017-08-29T20:22:01.836000000-00:00"} {:id 4, :name this, :message thiat stsignsdnk
+, :timestamp #inst "2017-08-29T20:26:58.876000000-00:00"} {:id 5, :name sfdsfd, :message sfdsfsdfdsf;jsdf sdfdsfsdffsd, :timestamp #inst "2017-08-29T20:27:13.866000000-00:00"} {:id 6, :name erlliot, :message aslfkjsdkfjsdjkfsd
+, :timestamp #inst "2017-08-29T20:40:22.562000000-00:00"} {:id 33, :name newperson, :message newpersonnewperson, :timestamp #inst "2017-08-30T21:43:54.766000000-00:00"} {:id 34, :name elliott, :message another elliott thing, :timestamp #inst "2017-08-30T21:45:54.603000000-00:00"}) 
+2017-08-31 13:54:43,435 [XNIO-1 task-25] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 13:54:43,435 [XNIO-1 task-25] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 13:54:43,730 [XNIO-1 task-25] INFO  guestbook.routes.home - get-messages: (elliott matt stupid this sfdsfd erlliot newperson elliott) 
+2017-08-31 13:54:58,200 [XNIO-1 task-23] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 13:54:58,201 [XNIO-1 task-23] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 13:54:58,441 [XNIO-1 task-23] INFO  guestbook.routes.home - get-messages: (elliott matt stupid this sfdsfd erlliot newperson) 
+2017-08-31 14:01:35,567 [XNIO-1 task-5] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 14:01:35,570 [XNIO-1 task-5] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 14:01:35,617 [XNIO-1 task-5] INFO  guestbook.routes.home - get-messages: {:messages (elliott matt stupid this sfdsfd erlliot newperson)} 
+2017-08-31 14:02:45,849 [XNIO-1 task-11] INFO  guestbook.env - 
+-=[guestbook has shut down successfully]=- 
+2017-08-31 14:02:45,850 [XNIO-1 task-11] INFO  guestbook.env - 
+-=[guestbook started successfully using the development profile]=- 
+2017-08-31 14:02:45,892 [XNIO-1 task-11] INFO  guestbook.routes.home - get-messages: {:messages (elliott matt stupid this sfdsfd erlliot newperson)} 
+2017-08-31 14:03:06,588 [XNIO-1 task-13] INFO  guestbook.routes.home - get-messages: {:messages (elliott matt stupid this sfdsfd erlliot newperson)} 

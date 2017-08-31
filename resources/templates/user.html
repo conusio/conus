@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<table class="tablesorter">
+    <thead>
+        <tr>
+            <th>users</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in messages %}
+        <tr>
+            <td><a href="user/{{item}}">{{item}}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
