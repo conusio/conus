@@ -49,11 +49,9 @@
                         (select-keys flash [:name]))))
 
 (defn user-page [user]
-  (let [_ (log/info "get-messages:" (filter #(= (str user) (:name %)) (db/get-messages)))]
-    [_ (log/info "user:" user)])
+  (let [_ (log/info {:messages (filter #(= (str user) (:name %)) (db/get-messages))})])
   (layout/render "user-page.html"
-                 {:messages (filter #(= (str user) (:name %)) (db/get-messages))})
-  )
+                 {:messages (filter #(= (str user) (:name %)) (db/get-messages)) :user user}))
 
 (defroutes home-routes
   (GET "/" request (home-page request))
