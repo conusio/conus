@@ -7,10 +7,6 @@
             [guestbook.db.core :as db]
             [struct.core :as st]))
 
-(defn one
-  []
-  1)
-
 (defn home-page [{:keys [flash]}]
   (layout/render
     "home.html"
@@ -44,9 +40,7 @@
 (defn user-list [poo]
   (let [_ (log/info "get-messages:" {:messages (distinct (map #(:name %) (db/get-messages)))})])
   (layout/render "user.html"
-                 {:messages (distinct (map #(:name %) (db/get-messages)))}
-                 #_(merge {:messages (db/get-messages)}
-                        (select-keys flash [:name]))))
+                 {:messages (distinct (map #(:name %) (db/get-messages)))}))
 
 (defn user-page [user]
   (let [_ (log/info {:messages (filter #(= (str user) (:name %)) (db/get-messages))})])
