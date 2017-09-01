@@ -25,7 +25,9 @@
                  [ring-middleware-format "0.7.0"]
                  [ring-webjars "0.1.1"]
                  [ring/ring-defaults "0.2.1"]
-                 [selmer "1.10.0"]]
+                 [selmer "1.10.0"]
+                 [mysql/mysql-connector-java "5.1.6"]
+                 [org.clojure/java.jdbc "0.7.1"]]
 
   :min-lein-version "2.0.0"
 

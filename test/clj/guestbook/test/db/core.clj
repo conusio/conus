@@ -28,5 +28,5 @@
       (is (= 1 (db/save-message! t-conn message)))
       (let [result (db/get-messages t-conn {})]
         (is (= 1 (count result)))
-        (is (= message (dissoc (first result) :id))))))
+        (is (= (dissoc message :timestamp) (dissoc (first result) :id :timestamp))))))
   (is (empty? (db/get-messages))))
