@@ -10,3 +10,7 @@ profiles.clj
 /.env
 .nrepl-port
 /log
+
+# for this project, do not keep db in vc.
+*.db
+.DS_Store
