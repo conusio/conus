@@ -18,8 +18,8 @@
            (select-keys flash [:name :message :errors]))))
 
 (def message-schema
-  [[:name st/required st/string]
-   [:message
+  [#_[:name st/required st/string]
+   #_[:message
     st/required
     st/string
     {:message "message must contain at least 10 characters"

@@ -19,7 +19,11 @@
   (jdbc/with-db-transaction [t-conn *db*]
     (jdbc/db-set-rollback-only! t-conn)
     (let [message {:name "test"
-                   :message "test"
+                   :description "test"
+                   :askingprice "100"
+                   :producturl "producturl"
+                   :imageurl "imageurl"
+                   :email "m@m.com"
                    :timestamp (java.util.Date.)}]
       (is (= 1 (db/save-message! t-conn message)))
       (let [result (db/get-messages t-conn {})]
