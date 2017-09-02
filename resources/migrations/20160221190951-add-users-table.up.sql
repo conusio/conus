@@ -1,4 +1,4 @@
-CREATE TABLE guestbook
+CREATE TABLE if not exists guestbook
 (id INTEGER PRIMARY KEY AUTO_INCREMENT,
  name VARCHAR(200),
  description VARCHAR(200),
