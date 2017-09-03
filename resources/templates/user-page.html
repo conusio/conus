@@ -9,7 +9,10 @@
     <tbody>
         {% for item in messages %}
         <tr>
+            <td>{{item.name}}</td>
             <td>{{item.description}}</td>
+            <td>{{item.askingprice}}</td>
+
         </tr>
         {% endfor %}
     </tbody>

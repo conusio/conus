@@ -38,14 +38,14 @@
   (layout/render "about.html"))
 
 (defn user-list [poo]
-  (let [_ (log/info "get-messages:" {:messages (distinct (map #(:name %) (db/get-messages)))})])
+  (let [_ (log/info "get-messages:" {:messages (distinct (map #(:email %) (db/get-messages)))})])
   (layout/render "user.html"
-                 {:messages (distinct (map #(:name %) (db/get-messages)))}))
+                 {:messages (distinct (map #(:email %) (db/get-messages)))}))
 
 (defn user-page [user]
-  (let [_ (log/info {:messages (filter #(= (str user) (:name %)) (db/get-messages))})])
+  (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
   (layout/render "user-page.html"
-                 {:messages (filter #(= (str user) (:name %)) (db/get-messages)) :user user}))
+                 {:messages (filter #(= (str user) (:email %)) (db/get-messages)) :user user}))
 
 (defroutes home-routes
   (GET "/" request (home-page request))

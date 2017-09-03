@@ -6,7 +6,10 @@
             <thead>
                 <tr>
                     <th>date</th>
-                    <th>message</th>
+                    <th>name</th>
+                    <th>description</th>
+                    <th>asking</th>
+                    <th>producturl</th>
                     <th><a href="user">users</a></th>
                 </tr>
             </thead>
@@ -14,8 +17,11 @@
             {% for item in messages %}
             <tr>
                 <td>{{item.timestamp|date:"yyyy-MM-dd HH:mm"}}</td>
+                <td>{{item.name}}</td>
                 <td>{{item.description}}</td>
-                <td><a href="user/{{item.name}}">{{item.name}}</a></td>
+                <td>{{item.askingprice}}</td>
+                <td>{{item.producturl}}</td>
+                <td><a href="user/{{item.email}}">{{item.email}}</a></td>
             </tr>
             {% endfor %}
             </tbody>
@@ -49,19 +55,15 @@
 
                 <p>
                     Askingprice:
-                <textarea class="form-control"
-                          rows="4"
-                          cols="50"
-                          name="askingprice">{{askingprice}}</textarea>
+                <input type="number" name="askingprice">{{askingprice}}</input>
                 </p>
                 {% if errors.askingprice %}
                 <div class="alert alert-danger">{{errors.askingprice|join}}</div>
                 {% endif %}
 
                 <p>
-                    Producturl:
+                    Product url:
                 <textarea class="form-control"
-                          rows="4"
                           cols="50"
                           name="producturl">{{producturl}}</textarea>
                 </p>
