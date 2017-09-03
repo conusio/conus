@@ -10,6 +10,7 @@
                     <th>description</th>
                     <th>asking</th>
                     <th>producturl</th>
+                    <th>image</th>
                     <th><a href="user">users</a></th>
                 </tr>
             </thead>
@@ -17,10 +18,12 @@
             {% for item in messages %}
             <tr>
                 <td>{{item.timestamp|date:"yyyy-MM-dd HH:mm"}}</td>
-                <td>{{item.name}}</td>
+                <td><a href="user/{{item.email}}/{{item.name}}">{{item.name}}</a></td>
                 <td>{{item.description}}</td>
                 <td>{{item.askingprice}}</td>
-                <td>{{item.producturl}}</td>
+                <td><a href="{{item.producturl}}">*</a></td>
+                <td>{{item.imageurl}}</td>
+
                 <td><a href="user/{{item.email}}">{{item.email}}</a></td>
             </tr>
             {% endfor %}

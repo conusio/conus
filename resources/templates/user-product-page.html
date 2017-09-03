@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<table class="tablesorter">
+    <thead>
+        <tr>
+            <th>{{user}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in messages %}
+        <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.askingprice}}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
