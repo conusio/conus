@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="span12">
+        <table class="tablesorter">
+            <thead>
+                <tr>
+                    <th>date</th>
+                    <th>name</th>
+                    <th>description</th>
+                    <th>asking</th>
+                    <th>producturl</th>
+                    <th>image</th>
+                    <th><a href="user">users</a></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in messages %}
+            <tr>
+                <td>{{item.timestamp|date:"yyyy-MM-dd HH:mm"}}</td>
+                <td><a href="user/{{item.email}}/{{item.name}}">{{item.name}}</a></td>
+                <td>{{item.description}}</td>
+                <td>{{item.askingprice}}</td>
+                <td><a href="{{item.producturl}}">*</a></td>
+                <td>{{item.imageurl}}</td>
+
+                <td><a href="user/{{item.email}}">{{item.email}}</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <form method="POST" action="/">
+                {% csrf-field %}
+                <p>
+                    Name:
+                    <input class="form-control"
+                           type="text"
+                           name="name"
+                           value="{{name}}" />
+                </p>
+                {% if errors.name %}
+                <div class="alert alert-danger">{{errors.name|join}}</div>
+                {% endif %}
+                <p>
+                    Description:
+                <textarea class="form-control"
+                          rows="4"
+                          cols="50"
+                          name="description">{{description}}</textarea>
+                </p>
+                {% if errors.description %}
+                <div class="alert alert-danger">{{errors.description|join}}</div>
+                {% endif %}
+
+                <p>
+                    Askingprice:
+                <input type="number" name="askingprice">{{askingprice}}</input>
+                </p>
+                {% if errors.askingprice %}
+                <div class="alert alert-danger">{{errors.askingprice|join}}</div>
+                {% endif %}
+
+                <p>
+                    Product url:
+                <textarea class="form-control"
+                          cols="50"
+                          name="producturl">{{producturl}}</textarea>
+                </p>
+                {% if errors.producturl %}
+                <div class="alert alert-danger">{{errors.producturl|join}}</div>
+                {% endif %}
+
+                <p>
+                    <form action="/upload" enctype="multipart/form-data" method="POST">
+                        {% csrf-field %}
+                        <input id="file" name="file" type="file" />
+                        <input type="submit" value="upload" />
+                    </form>
+
+                    Image:
+                <textarea class="form-control"
+                          rows="4"
+                          cols="50"
+                          name="imageurl">{{imageurl}}</textarea>
+                </p>
+                {% if errors.imageurl %}
+                <div class="alert alert-danger">{{errors.imageurl|join}}</div>
+                {% endif %}
+
+                <p>
+                    Email:
+                <textarea class="form-control"
+                          rows="4"
+                          cols="50"
+                          name="email">{{email}}</textarea>
+                </p>
+                {% if errors.email %}
+                <div class="alert alert-danger">{{errors.email|join}}</div>
+                {% endif %}
+
+                <input type="submit" class="btn btn-primary" value="comment" />
+        </form>
+    </div>
+</div>
+{% endblock %}
