@@ -24,7 +24,7 @@
     {:message "message must contain at least 10 characters"
      :validate #(> (count %) 9)}]])
 
-(def resource-path "./resources/images/")
+(def resource-path "resources/public/images/")
 
 (defn file-path [path & [filename]]
   (java.net.URLDecoder/decode
@@ -52,7 +52,7 @@
 (defn save-message! [{:keys [params] :as whole-thing}]
   (let [_ (log/info "the whole-thing is" whole-thing)
         _ (upload-file resource-path (:file params))
-        params-with-file-name (assoc params :imageurl (str resource-path (get-in params [:file :filename])))]
+        params-with-file-name (assoc params :imageurl (str "/images/" (get-in params [:file :filename])))]
     (if-let [errors (validate-message params)]
       (-> (response/found "/")
           (assoc :flash (assoc params :errors errors)))
