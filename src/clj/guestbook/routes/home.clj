@@ -50,13 +50,15 @@
     (st/validate params message-schema)))
 
 (defn save-message! [{:keys [params] :as whole-thing}]
-  (let [_ (log/info "the whole-thing is" whole-thing)]
+  (let [_ (log/info "the whole-thing is" whole-thing)
+        _ (upload-file resource-path (:file params))
+        params-with-file-name (assoc params :imageurl (str resource-path (get-in params [:file :filename])))]
     (if-let [errors (validate-message params)]
       (-> (response/found "/")
           (assoc :flash (assoc params :errors errors)))
       (do
         (db/save-message!
-         (assoc params :timestamp (java.util.Date.)))
+         (assoc params-with-file-name :timestamp (java.util.Date.)))
         (response/found "/")))))
 
 (defn about-page []
