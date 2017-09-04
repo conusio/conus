@@ -49,14 +49,15 @@
   (first
     (st/validate params message-schema)))
 
-(defn save-message! [{:keys [params]}]
-  (if-let [errors (validate-message params)]
-    (-> (response/found "/")
-        (assoc :flash (assoc params :errors errors)))
-    (do
-      (db/save-message!
-        (assoc params :timestamp (java.util.Date.)))
-      (response/found "/"))))
+(defn save-message! [{:keys [params] :as whole-thing}]
+  (let [_ (log/info "the whole-thing is" whole-thing)]
+    (if-let [errors (validate-message params)]
+      (-> (response/found "/")
+          (assoc :flash (assoc params :errors errors)))
+      (do
+        (db/save-message!
+         (assoc params :timestamp (java.util.Date.)))
+        (response/found "/")))))
 
 (defn about-page []
   (layout/render "about.html"))
