@@ -72,7 +72,7 @@
 (defn user-page [user]
   (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
   (layout/render "user-page.html"
-                 {:messages (filter #(= (str user) (:email %)) (db/get-messages)) :user user}))
+                 {:messages (filter #(= (str user) (:email %)) (db/get-messages)) :user user :email user}))
 
 
 (defn user-product-page [user user-product]
