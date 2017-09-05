@@ -80,10 +80,10 @@
 (defn user-product-page [user user-product]
   (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
   (layout/render "user-product-page.html"
-                 {:item (first (filter #(and
-                                             (= (str user) (:email %))
-                                             (= (str user-product) (:name %)))
-                                           (db/get-messages))) :user user :name user-product}))
+                 {:messages (filter #(and
+                                      (= (str user) (:email %))
+                                      (= (str user-product) (:name %)))
+                                    (db/get-messages)) :user user :name user-product}))
 
 (defroutes home-routes
   (GET "/" request (home-page request))
