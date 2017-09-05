@@ -77,6 +77,72 @@
     </tbody>
 </table>
 
+<form method="POST" enctype="multipart/form-data" action="/">
+    {% csrf-field %}
+    <p>
+        Name:
+        <input class="form-control"
+               type="text"
+               name="name"
+               value="{{name}}" />
+    </p>
+    {% if errors.name %}
+    <div class="alert alert-danger">{{errors.name|join}}</div>
+    {% endif %}
+    <p>
+        Description:
+        <textarea class="form-control"
+                  rows="4"
+                  cols="50"
+                  name="description">{{description}}</textarea>
+    </p>
+    {% if errors.description %}
+    <div class="alert alert-danger">{{errors.description|join}}</div>
+    {% endif %}
+
+    <p>
+        Askingprice:
+        <input type="number" name="askingprice">{{askingprice}}</input>
+    </p>
+    {% if errors.askingprice %}
+    <div class="alert alert-danger">{{errors.askingprice|join}}</div>
+    {% endif %}
+
+    <p>
+        Product url:
+        <textarea class="form-control"
+                  cols="50"
+                  name="producturl">{{producturl}}</textarea>
+    </p>
+    {% if errors.producturl %}
+    <div class="alert alert-danger">{{errors.producturl|join}}</div>
+    {% endif %}
+
+    <p>
+
+        Image:
+        <input id="file" name="file" type="file"/>
+
+    </p>
+    {% if errors.imageurl %}
+    <div class="alert alert-danger">{{errors.imageurl|join}}</div>
+    {% endif %}
+
+    <p>
+        Email:
+        <textarea class="form-control"
+                  rows="4"
+                  cols="50"
+                  name="email">{{email}}</textarea>
+    </p>
+    {% if errors.email %}
+    <div class="alert alert-danger">{{errors.email|join}}</div>
+    {% endif %}
+
+    <input type="submit" class="btn btn-primary" value="comment" />
+</form>
+
+
 <div id="columns">
     {% for item in messages %}
     <figure>
