@@ -33,7 +33,7 @@
 </div>
 <div class="row">
     <div class="span12">
-        <form method="POST" enctype="multipart/form-data" action="/">
+        <form method="POST" action="/">
                 {% csrf-field %}
                 <p>
                     Name:
@@ -75,8 +75,11 @@
                 {% endif %}
 
                 <p>
-
-<input id="file" name="file" type="file"/>
+                    <form action="/upload" enctype="multipart/form-data" method="POST">
+                        {% csrf-field %}
+                        <input id="file" name="file" type="file" />
+                        <input type="submit" value="upload" />
+                    </form>
 
                     Image:
                 <textarea class="form-control"
