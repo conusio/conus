@@ -1,9 +1,9 @@
-(ns guestbook.core
-  (:require [guestbook.handler :as handler]
+(ns conus.core
+  (:require [conus.handler :as handler]
             [luminus.repl-server :as repl]
             [luminus.http-server :as http]
             [luminus-migrations.core :as migrations]
-            [guestbook.config :refer [env]]
+            [conus.config :refer [env]]
             [clojure.tools.cli :refer [parse-opts]]
             [clojure.tools.logging :as log]
             [mount.core :as mount])
@@ -50,7 +50,7 @@
   (cond
     (some #{"migrate" "rollback"} args)
     (do
-      (mount/start #'guestbook.config/env)
+      (mount/start #'conus.config/env)
       (migrations/migrate args (select-keys env [:database-url]))
       (System/exit 0))
     :else

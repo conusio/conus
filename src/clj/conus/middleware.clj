@@ -1,11 +1,11 @@
-(ns guestbook.middleware
-  (:require [guestbook.env :refer [defaults]]
+(ns conus.middleware
+  (:require [conus.env :refer [defaults]]
             [clojure.tools.logging :as log]
-            [guestbook.layout :refer [*app-context* error-page]]
+            [conus.layout :refer [*app-context* error-page]]
             [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
             [ring.middleware.webjars :refer [wrap-webjars]]
             [ring.middleware.format :refer [wrap-restful-format]]
-            [guestbook.config :refer [env]]
+            [conus.config :refer [env]]
             [ring.middleware.flash :refer [wrap-flash]]
             [immutant.web.middleware :refer [wrap-session]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]])

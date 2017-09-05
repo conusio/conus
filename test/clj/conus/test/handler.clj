@@ -1,7 +1,7 @@
-(ns guestbook.test.handler
+(ns conus.test.handler
   (:require [clojure.test :refer :all]
             [ring.mock.request :refer :all]
-            [guestbook.handler :refer :all]))
+            [conus.handler :refer :all]))
 
 (deftest test-app
   (testing "main route"

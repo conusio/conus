@@ -1,1 +1,1 @@
-DROP TABLE guestbook;
+DROP TABLE conus;

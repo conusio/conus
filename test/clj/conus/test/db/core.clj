@@ -1,22 +1,22 @@
-(ns guestbook.test.db.core
-  (:require [guestbook.db.core :refer [*db*] :as db]
+(ns conus.test.db.core
+  (:require [conus.db.core :refer [*db*] :as db]
             [luminus-migrations.core :as migrations]
             [clojure.test :refer :all]
             [clojure.java.jdbc :as jdbc]
-            [guestbook.config :refer [env]]
+            [conus.config :refer [env]]
             [mount.core :as mount]))
 
 (use-fixtures
   :once
   (fn [f]
     (mount/start
-      #'guestbook.config/env
-      #'guestbook.db.core/*db*)
+      #'conus.config/env
+      #'conus.db.core/*db*)
     (migrations/migrate ["migrate"] (select-keys env [:database-url]))
     (f)))
 
 (deftest test-can-add-something-to-db
-  "unfortunately, luminus-guestbook was designed to be tested from `lein test`,
+  "unfortunately, luminus-conus was designed to be tested from `lein test`,
 not from the repl. so we can't guarantee a clean dev db when testing from repl.
 so we test that we can add transactions to the db, not whether an empty db can
 have one transaction added."

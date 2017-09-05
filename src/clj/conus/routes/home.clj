@@ -1,10 +1,10 @@
-(ns guestbook.routes.home
-  (:require [guestbook.layout :as layout]
+(ns conus.routes.home
+  (:require [conus.layout :as layout]
             [compojure.core :refer [defroutes GET POST]]
             [ring.util.http-response :as response]
             [clojure.java.io :as io]
             [clojure.tools.logging :as log]
-            [guestbook.db.core :as db]
+            [conus.db.core :as db]
             [struct.core :as st]))
 
 (defn home-page [{:keys [flash]}]

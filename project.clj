@@ -1,4 +1,4 @@
-(defproject guestbook "0.1.0-SNAPSHOT"
+(defproject conus "0.1.0-SNAPSHOT"
 
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
@@ -35,7 +35,7 @@
   :source-paths ["src/clj"]
   :resource-paths ["resources"]
   :target-path "target/%s/"
-  :main guestbook.core
+  :main conus.core
   :migratus {:store :database :db ~(get (System/getenv) "DATABASE_URL")}
 
   :plugins [[lein-cprop "1.0.1"]
@@ -45,7 +45,7 @@
   :profiles
   {:uberjar {:omit-source true
              :aot :all
-             :uberjar-name "guestbook.jar"
+             :uberjar-name "conus.jar"
              :source-paths ["env/prod/clj"]
              :resource-paths ["env/prod/resources"]}
 

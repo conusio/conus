@@ -1,8 +1,8 @@
-(ns guestbook.db.core
+(ns conus.db.core
   (:require
     [conman.core :as conman]
     [mount.core :refer [defstate]]
-    [guestbook.config :refer [env]]))
+    [conus.config :refer [env]]))
 
 (defstate ^:dynamic *db*
            :start (conman/connect! {:jdbc-url (env :database-url)})
