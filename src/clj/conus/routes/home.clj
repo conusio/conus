@@ -51,7 +51,7 @@
 
 (defn save-message! [{:keys [params] :as whole-thing}]
   (let [_ (log/info "the whole-thing is" whole-thing)
-        random-prefix (rand-int 1000000)
+        random-prefix (str (rand-int 1000000) "-conus-")
         _ (when (not= "" (get-in params [:file :filename])) (upload-file resource-path (:file params) random-prefix))
         params-with-file-name (assoc params :imageurl (str "/images/" (str random-prefix (get-in params [:file :filename]))))
         _ (log/info "imageurl is:" (:imageurl params-with-file-name))]
