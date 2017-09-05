@@ -73,8 +73,10 @@
 <div id="columns">
     {% for item in messages %}
     <figure>
-        <img src="{{item.imageurl}}">
-	      <figcaption><a href="{{item.email}}/{{item.name}}">{{item.name}}</a></figcaption>
+        <a href="{{item.email}}/{{item.name}}">
+            <img src="{{item.imageurl}}">
+	          <figcaption><a href="{{item.email}}/{{item.name}}">{{item.name}}</a></figcaption>
+        </a>
 	  </figure>
 </div>
 <table class="table" data-sort="table">
