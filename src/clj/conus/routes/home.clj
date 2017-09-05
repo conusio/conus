@@ -2,6 +2,7 @@
   (:require [conus.layout :as layout]
             [compojure.core :refer [defroutes GET POST]]
             [ring.util.http-response :as response]
+            [ring.util.response :refer [redirect file-response]]
             [clojure.java.io :as io]
             [clojure.tools.logging :as log]
             [conus.db.core :as db]
@@ -50,7 +51,8 @@
 (defn save-message! [{:keys [params] :as whole-thing}]
   (let [_ (log/info "the whole-thing is" whole-thing)
         _ (upload-file resource-path (:file params))
-        params-with-file-name (assoc params :imageurl (str "/images/" (get-in params [:file :filename])))]
+        params-with-file-name (assoc params :imageurl (str "/images/" (get-in params [:file :filename])))
+        _ (log/info "imageurl is:" (:imageurl params-with-file-name))]
     (if-let [errors (validate-message params)]
       (-> (response/found "/")
           (assoc :flash (assoc params :errors errors)))
