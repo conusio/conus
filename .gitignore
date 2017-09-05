@@ -14,3 +14,7 @@ profiles.clj
 # for this project, do not keep db in vc.
 *.db
 .DS_Store
+# resources/public/images should only contain user-uploaded images, for now
+/resources/public/images
+# emacs auto-save files
+.#*
