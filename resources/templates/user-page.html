@@ -5,7 +5,7 @@
      min-height: 1000px;
  }
  #columns {
-	   column-width: 320px;
+	   column-width: 120px;
 	   column-gap: 15px;
      width: 90%;
 	   max-width: 1100px;
@@ -69,14 +69,16 @@
  }
 </style>
 
-
 <div id="columns">
     {% for item in messages %}
     <figure>
         <img src="{{item.imageurl}}">
 	      <figcaption><a href="{{item.email}}/{{item.name}}">{{item.name}}</a></figcaption>
 	  </figure>
+    {% endfor %}
 </div>
+
+
 <table class="table" data-sort="table">
     <thead>
         <tr>
@@ -94,7 +96,6 @@
         {% endfor %}
     </tbody>
 </table>
-{% endfor %}
 <form method="POST" enctype="multipart/form-data" action="/">
     {% csrf-field %}
     <p>
