@@ -33,12 +33,13 @@
 (defn upload-file
   "uploads a file to the target folder
    when :create-path? flag is set to true then the target path will be created"
-  [path {:keys [tempfile size filename]}]
-  (let [_ (log/info "tempfile: " tempfile
-                    " \nfileoutputstream: "(file-path path filename))])
+  [path {:keys [tempfile size filename]} random-prefix]
+  (let [
+        _ (log/info "tempfile: " tempfile
+                    " \nfileoutputstream: "(file-path path (str random-prefix  filename)))])
   (try
     (with-open [in (new FileInputStream tempfile)
-                out (new FileOutputStream (file-path path filename))]
+                out (new FileOutputStream (file-path path (str random-prefix filename)))]
       (let [source (.getChannel in)
             dest   (.getChannel out)]
         (.transferFrom dest source 0 (.size source))
@@ -50,8 +51,9 @@
 
 (defn save-message! [{:keys [params] :as whole-thing}]
   (let [_ (log/info "the whole-thing is" whole-thing)
-        _ (when (not= "" (get-in params [:file :filename])) (upload-file resource-path (:file params)))
-        params-with-file-name (assoc params :imageurl (str "/images/" (get-in params [:file :filename])))
+        random-prefix (rand-int 1000000)
+        _ (when (not= "" (get-in params [:file :filename])) (upload-file resource-path (:file params) random-prefix))
+        params-with-file-name (assoc params :imageurl (str "/images/" (str random-prefix (get-in params [:file :filename]))))
         _ (log/info "imageurl is:" (:imageurl params-with-file-name))]
     (if-let [errors (validate-message params)]
       (-> (response/found "/")
@@ -78,10 +80,10 @@
 (defn user-product-page [user user-product]
   (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
   (layout/render "user-product-page.html"
-                 {:messages (filter #(and
-                                      (= (str user) (:email %))
-                                      (= (str user-product) (:name %)))
-                                    (db/get-messages)) :user user :name user-product}))
+                 {:item (first (filter #(and
+                                             (= (str user) (:email %))
+                                             (= (str user-product) (:name %)))
+                                           (db/get-messages))) :user user :name user-product}))
 
 (defroutes home-routes
   (GET "/" request (home-page request))
