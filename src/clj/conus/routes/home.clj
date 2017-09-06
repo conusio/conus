@@ -9,10 +9,15 @@
             [struct.core :as st])
   (:import [java.io File FileInputStream FileOutputStream]))
 
+;; https://github.com/conusio/conus/issues/7
+(defn fix-url-commas [items]
+  (for [item items]
+    (assoc item :url-name (clojure.string/replace (:name item) #"," "%2c"))))
+
 (defn home-page [{:keys [flash]}]
   (layout/render
     "home.html"
-    (merge {:messages (db/get-messages)}
+    (merge {:messages (fix-url-commas (db/get-messages))}
            (select-keys flash [:name :message :errors]))))
 
 (def message-schema
@@ -81,7 +86,7 @@
 (defn user-page [user]
   (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
   (layout/render "user-page.html"
-                 {:messages (filter #(= (str user) (:email %)) (db/get-messages)) :user user :email user}))
+                 {:messages (filter #(= (str user) (:email %)) (fix-url-commas (db/get-messages))) :user user :email user}))
 
 
 (defn user-product-page [user user-product]

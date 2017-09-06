@@ -74,9 +74,9 @@
 <div id="columns">
     {% for item in messages %}
     <figure>
-        <a href="{{item.email}}/{{item.name}}">
+        <a href="{{item.email}}/{{item.url-name}}">
             <img src="{{item.imageurl}}">
-	          <figcaption><a href="{{item.email}}/{{item.name}}">{{item.name}}</a></figcaption>
+	          <figcaption><a href="{{item.email}}/{{item.url-name}}">{{item.name}}</a></figcaption>
         </a>
 	  </figure>
     {% endfor %}
