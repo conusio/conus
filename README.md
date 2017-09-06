@@ -21,6 +21,14 @@ then from the repl, run
 
     (start)
 
+## making changes to queries.sql
+
+to have the app reload the queries.sql file, inside of `conus.db.core`, eval
+```clojure
+(conman/bind-connection *db* "sql/queries.sql")
+```
+(when you're running the app via `lein repl`)
+
 ## License
 
 Copyright © 2016 FIXME
