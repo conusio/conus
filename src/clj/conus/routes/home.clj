@@ -54,13 +54,13 @@
     (assoc $ :imageurl (str "/images/" (str random-prefix (get-in params [:file :filename]))))
     (assoc $ :name (clojure.string/trim (:name $)))))
 
-(defn upload-file-helper! [params]
+(defn upload-file-helper! [params random-prefix]
   (when (not= "" (get-in params [:file :filename])) (upload-file! resource-path (:file params) random-prefix)))
 
 (defn save-message! [{:keys [params] :as request}]
   (let [random-prefix (str (rand-int 1000000) "-conus-")
         _ (log/info "the http request is" request)
-        _ (upload-file-helper! params)
+        _ (upload-file-helper! params random-prefix)
         fixed-params (fix-params params random-prefix)]
     (if-let [errors (validate-message fixed-params)]
       (-> (response/found "/")
