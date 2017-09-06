@@ -30,7 +30,7 @@
    (str path File/separator filename)
    "utf-8"))
 
-(defn upload-file
+(defn upload-file!
   "uploads a file to the target folder
    when :create-path? flag is set to true then the target path will be created"
   [path {:keys [tempfile size filename]} random-prefix]
@@ -55,7 +55,7 @@
     (assoc $ :name (clojure.string/trim (:name $)))))
 
 (defn upload-file-helper! [params]
-  (when (not= "" (get-in params [:file :filename])) (upload-file resource-path (:file params) random-prefix)))
+  (when (not= "" (get-in params [:file :filename])) (upload-file! resource-path (:file params) random-prefix)))
 
 (defn save-message! [{:keys [params] :as request}]
   (let [random-prefix (str (rand-int 1000000) "-conus-")
