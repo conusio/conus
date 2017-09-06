@@ -102,7 +102,7 @@
   (GET "/upload" []
        (layout/render "upload.html"))
   (POST "/upload" [file]
-        (upload-file resource-path file)
+        (upload-file! resource-path file)
         (redirect (str "/anything/" (:filename file))))
   (GET "/anything/:filename" [filename]
        (let [_  (log/info "file-response: " (file-response (str resource-path filename)))])
