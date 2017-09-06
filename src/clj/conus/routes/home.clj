@@ -54,13 +54,13 @@
         random-prefix (str (rand-int 1000000) "-conus-")
         _ (when (not= "" (get-in params [:file :filename])) (upload-file resource-path (:file params) random-prefix))
         params-with-file-name (assoc params :imageurl (str "/images/" (str random-prefix (get-in params [:file :filename]))))
-        _ (log/info "imageurl is:" (:imageurl params-with-file-name))]
+        params-with-trimmed-name (assoc params-with-file-name :name (clojure.string/trim (:name params-with-file-name)))]
     (if-let [errors (validate-message params)]
       (-> (response/found "/")
           (assoc :flash (assoc params :errors errors)))
       (do
         (db/save-message!
-         (assoc params-with-file-name :timestamp (java.util.Date.)))
+         (assoc params-with-trimmed-name :timestamp (java.util.Date.)))
         (response/found "/")))))
 
 (defn about-page []
