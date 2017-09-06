@@ -100,7 +100,7 @@
 (defroutes home-routes
   (GET "/" request (home-page request))
   (POST "/" request (save-message! request))
-  (GET "/user" request (user-list request))
+  (GET "/user" request (user-list))
   (GET "/user/:user" [user] (user-page user))
   (GET "/user/:user/:user-product" [user user-product] (user-product-page user user-product))
   (GET "/about" [] (about-page))
