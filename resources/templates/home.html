@@ -16,6 +16,7 @@
                     <th>asking price</th>
                     <th>image</th>
                     <th><a href="user">users</a></th>
+                    <th>product url</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,7 @@
                 <td><a href="{{item.imageurl}}">*</a></td>
 
                 <td><a href="user/{{item.email}}">{{item.email}}</a></td>
+                <td>{{item.producturl}}</td>
             </tr>
             {% endfor %}
             </tbody>
