@@ -116,7 +116,7 @@
         (friend/authorize #{:conus.middleware/user} (redirect (str "/anything/" (:filename file)))))
   (GET "/anything/:filename" [filename]
        (let [_  (timbre/info "file-response: " (file-response (str resource-path filename)))])
-       (friend/authorize #{:conus.middleware/user} (file-response (str resource-path filename)))))
+       (friend/authorize #{:conus.middleware/user} (file-response (str resource-path filename))))
   ;; debugging
   (GET "/show-info" request #_(conus.middleware/render-users-info request)
-       (friend/authorize #{:conus.middleware/user} (conus.middleware/render-users-info request)))
+       (friend/authorize #{:conus.middleware/user} (conus.middleware/render-users-info request))))
