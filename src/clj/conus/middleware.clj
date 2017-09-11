@@ -79,7 +79,7 @@
   [request]
   (let [access-token (get-token request)
         repos-response (get-github-repos access-token)]
-   repos-response))
+    (str ((juxt :login :name :location) repos-response))))
 
 (defn wrap-context [handler]
   (fn [request]
