@@ -113,8 +113,8 @@
   (GET "/about" [] (about-page))
   (GET "/upload" []
        (layout/render "upload.html"))
-  (GET "/repos1" request
-       (friend/authorize #{:conus.middleware/user} (conus.middleware/render-repos-page request)))
+  (GET "/show-info" request (conus.middleware/render-repos-page request)
+       #_(friend/authorize #{:conus.middleware/user} (conus.middleware/render-repos-page request)))
   (POST "/upload" [file]
         (upload-file! resource-path file)
         (redirect (str "/anything/" (:filename file))))

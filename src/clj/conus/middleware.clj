@@ -95,8 +95,9 @@
   "Github API call for the current authenticated users repository list."
   [access-token]
   (let [url (str "https://api.github.com/user?access_token=" access-token)
-        response (client/get url {:accept :json})
-        reposa (json/read-str (:body response) :key-fn keyword)]
+        response (try  (client/get url {:accept :json})
+                       (catch Exception e "You're not logged in"))
+        reposa (if (= response "You're not logged in") "You're not logged in" (json/read-str (:body response) :key-fn keyword))]
     reposa))
 
 (defn render-repos-page

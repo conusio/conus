@@ -7,3 +7,15 @@ VALUES (:name, :description, :askingprice, :producturl, :imageurl, :email, :time
 -- :name get-messages :? :*
 -- :doc selects all available messages
 SELECT * from conus
+
+
+-- :name save-user! :! :n
+-- :doc inserts a user
+INSERT INTO users
+       ( name,  githubid,  email,  login,  location,  timestamp)
+VALUES (:name, :githubid, :email, :login, :location, :timestamp)
+
+
+-- :name get-users :? :*
+-- :doc get all users
+SELECT * from users
