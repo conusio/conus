@@ -6,7 +6,14 @@
             [clojure.java.io :as io]
             [clojure.tools.logging :as log]
             [conus.db.core :as db]
-            [struct.core :as st])
+            [struct.core :as st]
+            [conus.middleware :as mid]
+            [cemerick.friend :as friend]
+            [cemerick.friend [workflows :as workflows]
+             [credentials :as creds]]
+
+
+            )
   (:import [java.io File FileInputStream FileOutputStream]))
 
 ;; https://github.com/conusio/conus/issues/7
@@ -106,6 +113,9 @@
   (GET "/about" [] (about-page))
   (GET "/upload" []
        (layout/render "upload.html"))
+  (GET "/repos" request #_(mid/render-repos-page request)
+       (friend/authorize #{:conus.middleware/user} (conus.middleware/render-repos-page request)))
+
   (POST "/upload" [file]
         (upload-file! resource-path file)
         (redirect (str "/anything/" (:filename file))))
