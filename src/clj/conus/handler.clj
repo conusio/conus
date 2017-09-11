@@ -6,8 +6,7 @@
             [conus.env :refer [defaults]]
             [mount.core :as mount]
             [conus.middleware :as middleware]
-            [cemerick.friend :as friend]
-            ))
+            [cemerick.friend :as friend]))
 
 (mount/defstate init-app
                 :start ((or (:init defaults) identity))

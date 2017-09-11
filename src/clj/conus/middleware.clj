@@ -96,8 +96,8 @@
   [access-token]
   (let [url (str "https://api.github.com/user?access_token=" access-token)
         response (client/get url {:accept :json})
-        repos (json/read-str (:body response) :key-fn keyword)]
-    repos))
+        reposa (json/read-str (:body response) :key-fn keyword)]
+    reposa))
 
 (defn render-repos-page
   "Shows a list of the current users github repositories by calling the github api
@@ -105,7 +105,7 @@
   [request]
   (let [access-token (get-token request)
         repos-response (get-github-repos access-token)]
-    (->> repos-response
+   repos-response #_(->> repos-response
          (map :name)
          (vec)
          (str))))
@@ -113,7 +113,7 @@
 (def users {"root" {:username "root"
                     :password "admin_password"#_(creds/hash-bcrypt "admin_password")
                     :roles #{::admin}}
-            "jane" {:username "jane" 
+            "jane" {:username "jane"
                     :password "user-password" #_(creds/hash-bcrypt "user_password")
                     :roles #{::user}}})
 

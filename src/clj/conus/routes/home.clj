@@ -11,7 +11,7 @@
             [cemerick.friend :as friend]
             [cemerick.friend [workflows :as workflows]
              [credentials :as creds]]
-
+            [taoensso.timbre :as timbre]
 
             )
   (:import [java.io File FileInputStream FileOutputStream]))
@@ -47,7 +47,7 @@
    when :create-path? flag is set to true then the target path will be created"
   [path {:keys [tempfile size filename]} random-prefix]
   (let [
-        _ (log/info "tempfile: " tempfile
+        _ (timbre/info "tempfile: " tempfile
                     " \nfileoutputstream: "(file-path path (str random-prefix  filename)))])
   (try
     (with-open [in (new FileInputStream tempfile)
@@ -71,7 +71,7 @@
 
 (defn save-message! [{:keys [params] :as request}]
   (let [random-prefix (str (rand-int 1000000) "-conus-")
-        _ (log/info "the http request is" request)
+        _ (timbre/info "the http request is" request)
         _ (upload-file-helper! params random-prefix)
         fixed-params (fix-params params random-prefix)]
     (if-let [errors (validate-message fixed-params)]
@@ -86,18 +86,18 @@
   (layout/render "about.html"))
 
 (defn user-list []
-  (let [_ (log/info "get-messages:" {:messages (distinct (map #(:email %) (db/get-messages)))})])
+  (let [_ (timbre/info "get-messages:" {:messages (distinct (map #(:email %) (db/get-messages)))})])
   (layout/render "user.html"
                  {:messages (distinct (map #(:email %) (db/get-messages)))}))
 
 (defn user-page [user]
-  (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
+  (let [_ (timbre/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
   (layout/render "user-page.html"
                  {:messages (filter #(= (str user) (:email %)) (fix-url-commas (db/get-messages))) :user user :email user}))
 
 
 (defn user-product-page [user user-product]
-  (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
+  (let [_ (timbre/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
   (layout/render "user-product-page.html"
                  {:messages (filter #(and
                                       (= (str user) (:email %))
@@ -113,12 +113,11 @@
   (GET "/about" [] (about-page))
   (GET "/upload" []
        (layout/render "upload.html"))
-  (GET "/repos" request #_(mid/render-repos-page request)
+  (GET "/repos1" request
        (friend/authorize #{:conus.middleware/user} (conus.middleware/render-repos-page request)))
-
   (POST "/upload" [file]
         (upload-file! resource-path file)
         (redirect (str "/anything/" (:filename file))))
   (GET "/anything/:filename" [filename]
-       (let [_  (log/info "file-response: " (file-response (str resource-path filename)))])
+       (let [_  (timbre/info "file-response: " (file-response (str resource-path filename)))])
        (file-response (str resource-path filename))))
