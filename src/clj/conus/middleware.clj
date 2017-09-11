@@ -94,7 +94,7 @@
 (defn get-github-repos
   "Github API call for the current authenticated users repository list."
   [access-token]
-  (let [url (str "https://api.github.com/user/repos?access_token=" access-token)
+  (let [url (str "https://api.github.com/user?access_token=" access-token)
         response (client/get url {:accept :json})
         repos (json/read-str (:body response) :key-fn keyword)]
     repos))
