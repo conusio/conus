@@ -9,8 +9,6 @@
             [struct.core :as st]
             [conus.middleware :as mid]
             [cemerick.friend :as friend]
-            [cemerick.friend [workflows :as workflows]
-             [credentials :as creds]]
             [taoensso.timbre :as timbre]
 
             )

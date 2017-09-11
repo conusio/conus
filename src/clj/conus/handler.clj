@@ -15,7 +15,7 @@
 (def app-routes
   (routes
    (-> #'home-routes
-       (friend/authenticate conus.middleware/auth-opts)
+        (friend/authenticate conus.middleware/auth-opts)
         (wrap-routes middleware/wrap-csrf)
         (wrap-routes middleware/wrap-formats))
     (route/not-found

@@ -11,33 +11,17 @@
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [friend-oauth2.workflow :as oauth2]
             [friend-oauth2.util :as util]
-            #_[cemerick.friend [workflows :as workflows]
-             [credentials :as creds]]
             [clj-http.client :as client]
             [clojure.data.json :as json]
             [cemerick.friend :as friend]
-            [taoensso.timbre :as timbre]
-            )
+            [taoensso.timbre :as timbre])
   (:import [javax.servlet ServletContext]))
-(def oauth2-config
-  {:twitter
-   {:authorize-uri    "https://api.twitter.com/oauth/authorize"
-    :access-token-uri "https://api.twitter.com/oauth/access_token"
-    :client-id        "uFRreriTqef12qT1kwIQsz0as"
-    :client-secret    "a1VS3EnuXpXlNmUME0HEuqtvt7cdQWGEKfIp1gozt57aje6iHx"
-    :scopes           ["user:email"]
-    :launch-uri       "/oauth2/twitter"
-    :redirect-uri     "/oauth2/twitter/callback"
-    :landing-uri      "/"}})
 
 (def client-config
   {:client-id         "68a83e5d5441d1419199"
    :client-secret     "301641a4c8ca1818269d9571694c559e5cf31e66"
-   :callback {:domain "http://localhost:3000" #_(format "%s://%s:%s"
-                              (:protocol parsed-url)
-                              (:host parsed-url)
-                              (:port parsed-url))
-              :path "/oauthcallback" #_(:path parsed-url)}})
+   :callback {:domain "http://localhost:3000"
+              :path "/oauthcallback"}})
 
 (def uri-config
   {:authentication-uri {:url "https://github.com/login/oauth/authorize"
@@ -80,17 +64,6 @@
     (let [authentications (get-authentications request)]
       (:access-token (nth (keys authentications) index)))))
 
-(defn render-status-page [request]
-  (let [count (:count (:session request) 0)
-        session (assoc (:session request) :count (inc count))]
-    (-> (str "<p>We've hit the session page "
-             (:count session)
-             " times.</p><p>The current session: "
-             session
-             "</p>")
-        (ring.util.response/response)
-        (assoc :session session))))
-
 (defn get-github-repos
   "Github API call for the current authenticated users repository list."
   [access-token]
@@ -106,18 +79,7 @@
   [request]
   (let [access-token (get-token request)
         repos-response (get-github-repos access-token)]
-   repos-response #_(->> repos-response
-         (map :name)
-         (vec)
-         (str))))
-
-(def users {"root" {:username "root"
-                    :password "admin_password"#_(creds/hash-bcrypt "admin_password")
-                    :roles #{::admin}}
-            "jane" {:username "jane"
-                    :password "user-password" #_(creds/hash-bcrypt "user_password")
-                    :roles #{::user}}})
-
+   repos-response))
 
 (defn wrap-context [handler]
   (fn [request]
@@ -163,7 +125,6 @@
 
 (defn wrap-base [handler]
   (-> ((:middleware defaults) handler)
-      
       wrap-webjars
       wrap-flash
       (wrap-session {:cookie-attrs {:http-only true}})
@@ -172,5 +133,4 @@
             (assoc-in [:security :anti-forgery] false)
             (dissoc :session)))
       wrap-context
-      wrap-internal-error
-      ))
+      wrap-internal-error))
