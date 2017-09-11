@@ -19,3 +19,7 @@ VALUES (:name, :githubid, :email, :login, :location, :timestamp)
 -- :name get-users :? :*
 -- :doc get all users
 SELECT * from users
+
+-- :name get-logins :? :*
+-- :doc get all users
+SELECT login from users

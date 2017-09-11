@@ -103,19 +103,20 @@
                                     (db/get-messages)) :user user :name user-product}))
 
 (defroutes home-routes
-  (GET "/" request (home-page request))
-  (POST "/" request (save-message! request))
-  (GET "/user" request (user-list))
-  (GET "/user/:user" [user] (user-page user))
+  ;; you can view the home page, and view and share links to products without being logged in.
   (GET "/user/:user/:user-product" [user user-product] (user-product-page user user-product))
-  (GET "/about" [] (about-page))
-  (GET "/upload" []
-       (layout/render "upload.html"))
-  (GET "/show-info" request #_(conus.middleware/render-repos-page request)
-       (friend/authorize #{:conus.middleware/user} (conus.middleware/render-repos-page request)))
+  (GET "/" request (home-page request))
+
+  ;; for anyhting else, you need to be logged in.
+  (POST "/" request (friend/authorize #{:conus.middleware/user} (save-message! request)))
+  (GET "/user" request (friend/authorize #{:conus.middleware/user} (user-list)))
+  (GET "/user/:user" [user]  (friend/authorize #{:conus.middleware/user} (user-page user)))
   (POST "/upload" [file]
-        (upload-file! resource-path file)
-        (redirect (str "/anything/" (:filename file))))
+        (friend/authorize #{:conus.middleware/user}  (upload-file! resource-path file))
+        (friend/authorize #{:conus.middleware/user} (redirect (str "/anything/" (:filename file)))))
   (GET "/anything/:filename" [filename]
        (let [_  (timbre/info "file-response: " (file-response (str resource-path filename)))])
-       (file-response (str resource-path filename))))
+       (friend/authorize #{:conus.middleware/user} (file-response (str resource-path filename)))))
+  ;; debugging
+  (GET "/show-info" request #_(conus.middleware/render-users-info request)
+       (friend/authorize #{:conus.middleware/user} (conus.middleware/render-users-info request)))

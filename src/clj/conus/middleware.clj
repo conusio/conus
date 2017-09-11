@@ -37,9 +37,8 @@
 
 (defn credential-fn
   [token]
-  (let [_ (timbre/info "credential-fn is being called")]
-    ;;lookup token in DB or whatever to fetch appropriate :roles
-    {:identity token :roles #{:conus.middleware/user}}))
+  ;;lookup token in DB or whatever to fetch appropriate :roles
+  {:identity token :roles #{:conus.middleware/user}})
 
 
 (def workflow
@@ -62,9 +61,9 @@
     (get-token request 0))
   ([request index]
     (let [authentications (get-authentications request)]
-      (:access-token (nth (keys authentications) index)))))
+      (:access-token (nth (keys authentications) index))))) ;; i think the default value of index being 0 is a bug. it means that if some access-tokens become invalid, it'll choose the *oldest* access-token, not the most recent.
 
-(defn get-github-repos
+(defn get-user-info
   "Github API call for the current authenticated users repository list."
   [access-token]
   (let [url (str "https://api.github.com/user?access_token=" access-token)
@@ -73,13 +72,20 @@
         reposa (if (= response "You're not logged in") "You're not logged in" (json/read-str (:body response) :key-fn keyword))]
     reposa))
 
-(defn render-repos-page
+(defn render-users-info
   "Shows a list of the current users github repositories by calling the github api
    with the OAuth2 access token that the friend authentication has retrieved."
   [request]
   (let [access-token (get-token request)
-        repos-response (get-github-repos access-token)]
-    (str ((juxt :login :name :location) repos-response))))
+        repos-response (get-user-info access-token)
+        to-be-saved {:login     (:login repos-response)
+                     :githubid  (:id repos-response)
+                     :name      (:name repos-response)
+                     :email     (:email repos-response)
+                     :location  (:location repos-response)
+                     :timestamp (java.util.Date.)}]
+    (when-not (some  #{(:login to-be-saved)} (flatten (map vals (conus.db.core/get-logins)))) (conus.db.core/save-user! to-be-saved))
+    (str ((juxt :login :name :location :id) repos-response))))
 
 (defn wrap-context [handler]
   (fn [request]
