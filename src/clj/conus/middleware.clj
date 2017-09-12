@@ -20,7 +20,7 @@
 (def client-config
   {:client-id         "68a83e5d5441d1419199"
    :client-secret     "301641a4c8ca1818269d9571694c559e5cf31e66"
-   :callback {:domain "http://localhost:3000"
+   :callback {:domain "http://localhost:3000" ;; set in config: if dev, then localhost:3000, else rely on env var
               :path "/oauthcallback"}})
 
 (def uri-config

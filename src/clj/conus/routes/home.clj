@@ -107,7 +107,7 @@
   (GET "/user/:user/:user-product" [user user-product] (user-product-page user user-product))
   (GET "/" request (home-page request))
 
-  ;; for anyhting else, you need to be logged in.
+  ;; for anything else, you need to be logged in.
   (POST "/" request (friend/authorize #{:conus.middleware/user} (save-message! request)))
   (GET "/user" request (friend/authorize #{:conus.middleware/user} (user-list)))
   (GET "/user/:user" [user]  (friend/authorize #{:conus.middleware/user} (user-page user)))
