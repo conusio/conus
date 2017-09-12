@@ -29,7 +29,8 @@
                  [mysql/mysql-connector-java "5.1.6"]
                  [org.clojure/java.jdbc "0.7.1"]
                  [clojusc/friend-oauth2 "0.2.0"]
-                 [com.taoensso/timbre "4.1.0"]]
+                 [com.taoensso/timbre "4.1.0"]
+                 [ch.qos.logback/logback-classic "1.1.3"]]
 
   :min-lein-version "2.0.0"
 

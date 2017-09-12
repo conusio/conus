@@ -72,20 +72,20 @@
         reposa (if (= response "You're not logged in") "You're not logged in" (json/read-str (:body response) :key-fn keyword))]
     reposa))
 
-(defn render-users-info
+(defn auth-user-and-save-to-db!
   "Shows a list of the current users github repositories by calling the github api
    with the OAuth2 access token that the friend authentication has retrieved."
   [request]
   (let [access-token (get-token request)
-        repos-response (get-user-info access-token)
-        to-be-saved {:login     (:login repos-response)
-                     :githubid  (:id repos-response)
-                     :name      (:name repos-response)
-                     :email     (:email repos-response)
-                     :location  (:location repos-response)
-                     :timestamp (java.util.Date.)}]
-    (when-not (some  #{(:login to-be-saved)} (flatten (map vals (conus.db.core/get-logins)))) (conus.db.core/save-user! to-be-saved))
-    (str ((juxt :login :name :location :id) repos-response))))
+        user-info    (get-user-info access-token)
+        user         {:login     (:login user-info)
+                      :githubid  (:id user-info)
+                      :name      (:name user-info)
+                      :email     (:email user-info)
+                      :location  (:location user-info)
+                      :timestamp (java.util.Date.)}]
+    (when-not (some #{(:login user)} (flatten (map vals (conus.db.core/get-logins)))) (conus.db.core/save-user! user))
+    #_(str ((juxt :login :name :location :id) user-info))))
 
 (defn wrap-context [handler]
   (fn [request]

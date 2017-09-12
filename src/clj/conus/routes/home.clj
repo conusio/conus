@@ -65,6 +65,10 @@
 (defn upload-file-helper! [params random-prefix]
   (when (not= "" (get-in params [:file :filename])) (upload-file! resource-path (:file params) random-prefix)))
 
+(defn get-owner [request]
+  (let [user (conus.middleware/get-user-info (conus.middleware/get-token request))]
+    (:id (first (db/get-owner-from-login {:login (:login user)})))))
+
 (defn save-message! [{:keys [params] :as request}]
   (let [random-prefix (str (rand-int 1000000) "-conus-")
         _ (log/info "the http request is" request)
@@ -76,6 +80,8 @@
       (do
         (db/save-message!
          (assoc fixed-params :timestamp (java.util.Date.)))
+        (db/save-thing!
+         (assoc fixed-params :owner (get-owner request) :timestamp (java.util.Date.)))
         (response/found "/")))))
 
 (defn about-page []
@@ -115,6 +121,7 @@
   (GET "/anything/:filename" [filename]
        (let [_  (log/info "file-response: " (file-response (str resource-path filename)))])
        (friend/authorize #{:conus.middleware/user} (file-response (str resource-path filename))))
-  ;; debugging
-  (GET "/show-info" request #_(conus.middleware/render-users-info request)
-       (friend/authorize #{:conus.middleware/user} (conus.middleware/render-users-info request))))
+  (GET "/show-info" request (conus.middleware/auth-user-and-save-to-db! request))
+
+
+  )

@@ -8,6 +8,16 @@ CREATE TABLE if not exists conus
  email VARCHAR(200),
  timestamp TIMESTAMP);
 --;;
+CREATE TABLE if not exists things
+(id INTEGER PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(200),
+owner INTEGER,
+description VARCHAR(200),
+askingprice VARCHAR(200),
+producturl VARCHAR(200),
+imageurl VARCHAR(200),
+timestamp TIMESTAMP);
+--;;
 CREATE TABLE if not exists users
 (id INTEGER PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(200),

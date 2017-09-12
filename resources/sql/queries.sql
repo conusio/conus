@@ -8,6 +8,15 @@ VALUES (:name, :description, :askingprice, :producturl, :imageurl, :email, :time
 -- :doc selects all available messages
 SELECT * from conus
 
+-- :name save-thing! :! :n
+-- :doc creates a new thing
+INSERT INTO things
+       ( name,  owner,  description,  askingprice,  producturl,  imageurl,  timestamp)
+VALUES (:name, :owner, :description, :askingprice, :producturl, :imageurl, :timestamp)
+
+-- :name get-things :? :*
+-- :doc selects all available things
+SELECT * from things
 
 -- :name save-user! :! :n
 -- :doc inserts a user
@@ -19,6 +28,10 @@ VALUES (:name, :githubid, :email, :login, :location, :timestamp)
 -- :name get-users :? :*
 -- :doc get all users
 SELECT * from users
+
+-- :name get-owner-from-login :? :*
+SELECT id from users
+where login = :login
 
 -- :name get-logins :? :*
 -- :doc get all users
