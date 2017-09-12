@@ -1,10 +1,100 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="dashhead-titles">
-    <h6 class="dashhead-subtitle">CONUS</h6>
-    <h2 class="dashhead-title">Recently Added</h2>
+<script type="text/javascript">
+ $('.grid').masonry({
+     itemSelector: '.grid-item',
+     columnWidth: 160,
+     horizontalOrder: true
+ });
+</script>
+<style type="'text/css">
+    .grid {
+    background: #EEE;
+    max-width: 1200px;
+    counter-reset: grid-item;
+    }
+
+    /* clearfix */
+    .grid:after {
+    content: '';
+    display: block;
+    clear: both;
+    }
+
+    /* ---- grid-item ---- */
+
+    .grid-item {
+    width: 160px;
+    height: 120px;
+    float: left;
+    background: #D26;
+    border: 2px solid #333;
+    border-color: hsla(0, 0%, 0%, 0.5);
+    border-radius: 5px;
+    }
+
+    .grid-item--width2 { width: 320px; }
+    .grid-item--width3 { width: 480px; }
+    .grid-item--width4 { width: 720px; }
+
+    .grid-item--height2 { height: 200px; }
+    .grid-item--height3 { height: 260px; }
+    .grid-item--height4 { height: 360px; }
+
+    .grid-item:before {
+    counter-increment: grid-item;
+    content: counter(grid-item);
+    display: block;
+    color: white;
+    padding-top: 0.2em;
+    text-align: center;
+    font-size: 1.4rem;
+    }
+</style>
+<h1>Masonry - horizontalOrder</h1>
+
+<div class="grid">
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item grid-item--height3"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--height3"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item grid-item--height3"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
 </div>
 
+<div class="grid">
+        {% for item in messages %}<!-- http://w3bits.com/labs/css-masonry/3/ -->
+    <div class="grid-item">
+        <img src="{{item.imageurl}}" />
+    </div>
+      {% endfor %}
+</div>
+
+
+    <div class="masonry gutterless">
+        {% for item in messages %}<!-- http://w3bits.com/labs/css-masonry/3/ -->
+		<div class="brick">
+				<img src="{{item.imageurl}}">
+          <div class="bottom-left"><h3><span>{{item.name}}</span></h3></div>
+			</div>
+      {% endfor %}
+		</div>
+	</div>
     <div class="span12">
         <div class="table-responsive">
             <table class="table" data-sort="table">

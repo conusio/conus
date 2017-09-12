@@ -13,6 +13,108 @@
     {% style "/css/toolkit-light.css" %}
     {% style "/css/application.css" %}
     {% style "/css/docs.css" %}
+    <script src="masonry.pkgd.js"></script>
+    <style type='text/css'>
+     img {
+         max-width: 100%;
+         vertical-align: bottom;
+     }
+
+     .wrapper {
+         width: 92.5%;
+         padding: 1em;
+     }
+
+
+
+     .masonry {
+         -moz-transition: all .5s ease-in-out;
+         -webkit-transition: all .5s ease-in-out;
+         transition: all .5s ease-in-out;
+         -moz-column-gap: 30px;
+         -webkit-column-gap: 30px;
+         column-gap: 30px;
+         -moz-column-fill: initial;
+         -webkit-column-fill: initial;
+         column-fill: initial;
+     }
+     .masonry .brick {
+         margin-bottom: 30px;
+         position: relative;
+     }
+     .masonry .brick img {
+         -moz-transition: all .5s ease-in-out;
+         -webkit-transition: all .5s ease-in-out;
+         transition: all .5s ease-in-out;
+     }
+     .masonry .brick:hover img {
+         opacity: .75;
+     }
+     .masonry.gutterless {
+         -moz-column-gap: 0;
+         -webkit-column-gap: 0;
+         column-gap: 0;
+     }
+     .masonry.gutterless .brick {
+         margin-bottom: 0;
+         position: relative;
+     }
+
+     .span {
+         -moz-column-span: all;
+         -webkit-column-span: all;
+         column-span: all;
+         *margin: 30px 0;
+     }
+     h3 span { 
+         color: white; 
+         font: bold 14px/24px Helvetica, Sans-Serif; 
+         letter-spacing: -1px;  
+         background: rgb(0, 0, 0); /* fallback color */
+         background: rgba(0, 0, 0, 0.7);
+         padding: 10px; 
+     }
+     @media only screen and (min-width: 1024px) {
+         .desc {
+             font-size: 1.25em;
+         }
+
+         .intro {
+             letter-spacing: 1px;
+         }
+
+         .wrapper {
+             width: 80%;
+             padding: 2em;
+         }
+
+         .masonry {
+             -moz-column-count: 4;
+             -webkit-column-count: 4;
+             column-count: 4;
+         }
+     }
+     @media only screen and (min-width: 768px) and (max-width: 1023px) {
+         .wrapper {
+             width: 85%;
+             padding: 1.5em;
+         }
+
+         .masonry {
+             -moz-column-count: 2;
+             -webkit-column-count: 2;
+             column-count: 2;
+         }
+     }
+     .bottom-left {
+         position: absolute;
+         bottom: 8px;
+         left: 0;
+     }
+     .grid-item { width: 400px; }
+     .grid-item--width2 { width: 800px; }
+    </style>
+
   </head>
   <body class="with-top-navbar">
 
@@ -57,24 +159,26 @@
           </div>
         </nav>
       </div>
-      <div class="col-md-9 content">
+      <div class="col-xl-9 content">
         <div class="dashhead">
 
   <div class="btn-toolbar dashhead-toolbar">
-    <div class="btn-toolbar-item input-with-icon">
-      <!--  <input type="text" value="01/01/15 - 01/08/15" class="form-control" data-provide="datepicker">
-      <span class="icon icon-calendar"></span> -->
-    </div>
+      <div class="btn-toolbar-item input-with-icon">
+          <!--  <input type="text" value="01/01/15 - 01/08/15" class="form-control" data-provide="datepicker">
+               <span class="icon icon-calendar"></span> -->
+      </div>
   </div>
-</div>
+        </div>
 
-      {% block content %}
-      {% endblock %}
+        {% block content %}
+        {% endblock %}
 
-    <!-- scripts -->
-    {% script "/assets/jquery/jquery.min.js" %}
-    {% script "/assets/tether/dist/js/tether.min.js" %}
-    {% script "/assets/bootstrap/js/bootstrap.min.js" %}
+        <!-- scripts -->
+        {% script "/assets/jquery/jquery.min.js" %}
+        {% script "/assets/tether/dist/js/tether.min.js" %}
+        {% script "/assets/bootstrap/js/bootstrap.min.js" %}
+        {% script "/assets/masonry-layout/4.2.0/dist/masonry.pkgd.js" %}
+
 
     <script type="text/javascript">
       var context = "{{servlet-context}}";
