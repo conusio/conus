@@ -9,9 +9,7 @@
             [struct.core :as st]
             [conus.middleware :as mid]
             [cemerick.friend :as friend]
-            [taoensso.timbre :as timbre]
-
-            )
+            [taoensso.timbre :as timbre])
   (:import [java.io File FileInputStream FileOutputStream]))
 
 ;; https://github.com/conusio/conus/issues/7
@@ -45,7 +43,7 @@
    when :create-path? flag is set to true then the target path will be created"
   [path {:keys [tempfile size filename]} random-prefix]
   (let [
-        _ (timbre/info "tempfile: " tempfile
+        _ (log/info "tempfile: " tempfile
                     " \nfileoutputstream: "(file-path path (str random-prefix  filename)))])
   (try
     (with-open [in (new FileInputStream tempfile)
@@ -69,7 +67,7 @@
 
 (defn save-message! [{:keys [params] :as request}]
   (let [random-prefix (str (rand-int 1000000) "-conus-")
-        _ (timbre/info "the http request is" request)
+        _ (log/info "the http request is" request)
         _ (upload-file-helper! params random-prefix)
         fixed-params (fix-params params random-prefix)]
     (if-let [errors (validate-message fixed-params)]
@@ -84,18 +82,18 @@
   (layout/render "about.html"))
 
 (defn user-list []
-  (let [_ (timbre/info "get-messages:" {:messages (distinct (map #(:email %) (db/get-messages)))})])
+  (let [_ (log/info "get-messages:" {:messages (distinct (map #(:email %) (db/get-messages)))})])
   (layout/render "user.html"
                  {:messages (distinct (map #(:email %) (db/get-messages)))}))
 
 (defn user-page [user]
-  (let [_ (timbre/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
+  (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
   (layout/render "user-page.html"
                  {:messages (filter #(= (str user) (:email %)) (fix-url-commas (db/get-messages))) :user user :email user}))
 
 
 (defn user-product-page [user user-product]
-  (let [_ (timbre/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
+  (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
   (layout/render "user-product-page.html"
                  {:messages (filter #(and
                                       (= (str user) (:email %))
@@ -115,7 +113,7 @@
         (friend/authorize #{:conus.middleware/user}  (upload-file! resource-path file))
         (friend/authorize #{:conus.middleware/user} (redirect (str "/anything/" (:filename file)))))
   (GET "/anything/:filename" [filename]
-       (let [_  (timbre/info "file-response: " (file-response (str resource-path filename)))])
+       (let [_  (log/info "file-response: " (file-response (str resource-path filename)))])
        (friend/authorize #{:conus.middleware/user} (file-response (str resource-path filename))))
   ;; debugging
   (GET "/show-info" request #_(conus.middleware/render-users-info request)
