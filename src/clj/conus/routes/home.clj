@@ -116,7 +116,7 @@
   (GET "/anything/:filename" [filename]
        (let [_  (log/info "file-response: " (file-response (str resource-path filename)))])
        (friend/authorize #{:conus.middleware/user} (file-response (str resource-path filename))))
-  (GET "/show-info" request (conus.middleware/auth-user-and-save-to-db! request))
+  (GET "/add-you" request (conus.middleware/auth-user-and-save-to-db! request))
 
 
   )
