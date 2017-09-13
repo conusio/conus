@@ -1,6 +1,7 @@
 (ns user
   (:require [mount.core :as mount]
             [luminus-migrations.core :as migrations]
+            [conus.db.core :as db]
             conus.core))
 
 
@@ -22,3 +23,10 @@
   (start))
 
 
+(def fixture-data-maybe
+  {:name "ipad"
+   :description "an ipad"
+   :askingprice "200"
+   :imageurl ".png"
+   :producturl "lemonparty.org"
+   :timestamp (java.util.Date.)})
