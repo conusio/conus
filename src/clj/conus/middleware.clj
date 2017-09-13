@@ -73,8 +73,7 @@
     reposa))
 
 (defn auth-user-and-save-to-db!
-  "Shows a list of the current users github repositories by calling the github api
-   with the OAuth2 access token that the friend authentication has retrieved."
+"i'm not sure where this should be called."
   [request]
   (let [access-token (get-token request)
         user-info    (get-user-info access-token)
@@ -84,8 +83,7 @@
                       :email     (:email user-info)
                       :location  (:location user-info)
                       :timestamp (java.util.Date.)}]
-    (when-not (some #{(:login user)} (flatten (map vals (conus.db.core/get-logins)))) (conus.db.core/save-user! user))
-    #_(str ((juxt :login :name :location :id) user-info))))
+    (when-not (some #{(:login user)} (flatten (map vals (conus.db.core/get-logins)))) (conus.db.core/save-user! user))))
 
 (defn wrap-context [handler]
   (fn [request]

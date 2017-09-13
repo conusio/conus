@@ -67,7 +67,7 @@
 
 (defn get-owner [request]
   (let [user (mid/get-user-info (mid/get-token request))]
-    (:id (first (db/get-owner-from-login {:login (:login user)}))))) ;; this is also messy
+    (:id (db/get-owner-from-login {:login (:login user)})))) ;; this is also messy
 
 (defn save-message! [{:keys [params] :as request}]
   (let [random-prefix (str (rand-int 1000000) "-conus-")
