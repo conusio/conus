@@ -23,12 +23,12 @@
             {% for item in messages %}
             <tr>
                 <td>{{item.timestamp|date:"yyyy-MM-dd HH:mm"}}</td>
-                <td><a href="user/{{item.email}}/{{item.url-name}}">{{item.name}}</a></td>
+                <td><a href="user/{{item.login}}/{{item.url-name}}">{{item.name}}</a></td>
                 <td>{{item.description}}</td>
                 <td>{{item.askingprice}}</td>
                 <td><a href="{{item.imageurl}}">*</a></td>
 
-                <td><a href="user/{{item.email}}">{{item.email}}</a></td>
+                <td><a href="user/{{item.login}}">{{item.login}}</a></td>
                 <td>{{item.producturl}}</td>
             </tr>
             {% endfor %}

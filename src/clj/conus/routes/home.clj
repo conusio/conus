@@ -20,7 +20,7 @@
 (defn home-page [{:keys [flash]}]
   (layout/render
     "home.html"
-    (merge {:messages (fix-url-commas (db/get-messages))}
+    (merge {:messages (fix-url-commas (db/get-for-home-page))}
            (select-keys flash [:name :message :errors]))))
 
 (def message-schema
@@ -66,7 +66,7 @@
   (when (not= "" (get-in params [:file :filename])) (upload-file! resource-path (:file params) random-prefix)))
 
 (defn get-owner [request]
-  (let [user (conus.middleware/get-user-info (conus.middleware/get-token request))]
+  (let [user (mid/get-user-info (mid/get-token request))]
     (:id (first (db/get-owner-from-login {:login (:login user)})))))
 
 (defn save-message! [{:keys [params] :as request}]
@@ -88,23 +88,18 @@
   (layout/render "about.html"))
 
 (defn user-list []
-  (let [_ (log/info "get-messages:" {:messages (distinct (map #(:email %) (db/get-messages)))})])
   (layout/render "user.html"
-                 {:messages (distinct (map #(:email %) (db/get-messages)))}))
+                 {:messages (map :login (db/get-users))}))
 
 (defn user-page [user]
-  (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
   (layout/render "user-page.html"
-                 {:messages (filter #(= (str user) (:email %)) (fix-url-commas (db/get-messages))) :user user :email user}))
+                 {:messages (db/get-things-by-owner {:owner (:id  (db/get-owner-from-login {:login user}))}) :user user :email user})) ;; TODO fix messy logic through table join
 
 
 (defn user-product-page [user user-product]
-  (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
+  (let [_ (log/info {:messages (db/get-thing-by-login-and-name {:login user :name user-product})})])
   (layout/render "user-product-page.html"
-                 {:messages (filter #(and
-                                      (= (str user) (:email %))
-                                      (= (str user-product) (:name %)))
-                                    (db/get-messages)) :user user :name user-product}))
+                 {:messages (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product}))
 
 (defroutes home-routes
   ;; you can view the home page, and view and share links to products without being logged in.
