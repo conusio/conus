@@ -83,7 +83,8 @@
                       :email     (:email user-info)
                       :location  (:location user-info)
                       :timestamp (java.util.Date.)}]
-    (when-not (some #{(:login user)} (flatten (map vals (conus.db.core/get-logins)))) (conus.db.core/save-user! user))))
+    (when-not (some #{(:login user)} (flatten (map vals (conus.db.core/get-logins)))) (conus.db.core/save-user! user)))
+  "you are probably added to the db")
 
 (defn wrap-context [handler]
   (fn [request]
