@@ -72,19 +72,24 @@
         reposa (if (= response "You're not logged in") "You're not logged in" (json/read-str (:body response) :key-fn keyword))]
     reposa))
 
-(defn auth-user-and-save-to-db!
-"i'm not sure where this should be called."
-  [request]
-  (let [access-token (get-token request)
-        user-info    (get-user-info access-token)
-        user         {:login     (:login user-info)
-                      :githubid  (:id user-info)
-                      :name      (:name user-info)
-                      :email     (:email user-info)
-                      :location  (:location user-info)
-                      :timestamp (java.util.Date.)}]
-    (when-not (some #{(:login user)} (flatten (map vals (conus.db.core/get-logins)))) (conus.db.core/save-user! user)))
-  "you are probably added to the db")
+(defn wrap-auth-user-and-save-to-db!
+  [handler]
+  (fn [request]
+    (log/info "wrap-auth-user-and-save-to-do! was called")
+    (if-let [access-token  (get-token request)] ;; when these are nil, a nil user gets put into the db. HACK FIXME
+      (if-let [user-info  (get-user-info access-token)]
+        (let  [user     {:login     (:login user-info)
+                         :githubid  (:id user-info)
+                         :name      (:name user-info)
+                         :email     (:email user-info)
+                         :location  (:location user-info)
+                         :timestamp (java.util.Date.)}]
+              (when-not (contains? (set (flatten (map vals (db/get-logins)))) (:login user))
+                (do
+                  (conus.db.core/save-user! user)
+                  (log/info "(db/save-user! was called")
+                  )))))
+    (handler request)))
 
 (defn wrap-context [handler]
   (fn [request]
@@ -130,6 +135,7 @@
 
 (defn wrap-base [handler]
   (-> ((:middleware defaults) handler)
+      wrap-auth-user-and-save-to-db!
       wrap-webjars
       wrap-flash
       (wrap-session {:cookie-attrs {:http-only true}})
