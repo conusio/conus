@@ -1,100 +1,235 @@
 {% extends "base.html" %}
 {% block content %}
+<link rel='stylesheet prefetch' href='css/owwlyz.css'>
+
+<link rel="stylesheet" href="css/style.css">
 <script type="text/javascript">
- $('.grid').masonry({
-     itemSelector: '.grid-item',
-     columnWidth: 160,
-     horizontalOrder: true
- });
+
+ window.onload = function() {
+     if (window.jQuery) {  
+         // jQuery is loaded  
+         alert("Yeah!");
+     } else {
+         // jQuery is not loaded
+         alert("Doesn't Work");
+     }
+ }
+
 </script>
 <style type="'text/css">
-    .grid {
-    background: #EEE;
-    max-width: 1200px;
-    counter-reset: grid-item;
-    }
-
-    /* clearfix */
-    .grid:after {
-    content: '';
-    display: block;
-    clear: both;
-    }
-
-    /* ---- grid-item ---- */
-
-    .grid-item {
-    width: 160px;
-    height: 120px;
-    float: left;
-    background: #D26;
-    border: 2px solid #333;
-    border-color: hsla(0, 0%, 0%, 0.5);
-    border-radius: 5px;
-    }
-
-    .grid-item--width2 { width: 320px; }
-    .grid-item--width3 { width: 480px; }
-    .grid-item--width4 { width: 720px; }
-
-    .grid-item--height2 { height: 200px; }
-    .grid-item--height3 { height: 260px; }
-    .grid-item--height4 { height: 360px; }
-
-    .grid-item:before {
-    counter-increment: grid-item;
-    content: counter(grid-item);
-    display: block;
-    color: white;
-    padding-top: 0.2em;
-    text-align: center;
-    font-size: 1.4rem;
-    }
 </style>
-<h1>Masonry - horizontalOrder</h1>
+  <h1>Infinite Scroll - Masonry image grid</h1>
 
-<div class="grid">
-  <div class="grid-item grid-item--height2"></div>
-  <div class="grid-item grid-item--height3"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item grid-item--height2"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item grid-item--height3"></div>
-  <div class="grid-item grid-item--height2"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item grid-item--height2"></div>
-  <div class="grid-item grid-item--height3"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item grid-item--height2"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item grid-item--height2"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item grid-item--height2"></div>
-  <div class="grid-item"></div>
-  <div class="grid-item"></div>
+<div class="grid are-images-unloaded">
+{% for item in messages %}
+  <div class="grid__item">
+    <img src="{{item.imageurl}}" alt="orange tree" />
+  </div>
+  {% endfor %}
 </div>
 
-<div class="grid">
-        {% for item in messages %}<!-- http://w3bits.com/labs/css-masonry/3/ -->
-    <div class="grid-item">
-        <img src="{{item.imageurl}}" />
-    </div>
-      {% endfor %}
+  <script src='https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.js'></script>
+<script src='https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js'></script>
+
+    <script src="js/index.js"></script>
+
+
+
+    <div class="grid">
+        <div class="grid__item">
+            <img src="/images/image.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/image.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/883169image.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/203579-conus-00210654-2A24-4C55-88F5-D345FF4DF540.jpeg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/466411-conus-9D5B0FA5-98F8-4F6D-BE94-DEC3AF5AB9BC.jpeg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/150981-conus-4EAD1E95-FDA6-403E-A290-F05702C26D2E.jpeg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/182969-conus-image.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/927528-conus-image.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/176843-conus-R0000580.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/799408-conus-R0000581.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/852037-conus-R0000582.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/88318-conus-R0000583.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/828191-conus-R0000584.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/836167-conus-R0000585.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/742541-conus-R0000586.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/894597-conus-R0000587.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/920564-conus-R0000588.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/742587-conus-R0000589.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/820892-conus-R0000590.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/952428-conus-R0000591.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/64110-conus-R0000592.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/408049-conus-R0000593.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/909813-conus-R0000594.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/376650-conus-R0000595.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/793756-conus-R0000596.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/422476-conus-R0000597.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/621053-conus-R0000598.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/427377-conus-R0000599.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/616865-conus-R0000601.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/26526-conus-R0000602.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/50452-conus-R0000603.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/787286-conus-R0000604.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/412747-conus-R0000605.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/740846-conus-R0000606.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/185641-conus-R0000607.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/34154-conus-R0000608.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/190025-conus-R0000609.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/696279-conus-R0000610.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/339537-conus-R0000611.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/829070-conus-R0000612.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/111206-conus-R0000613.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/35531-conus-R0000614.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/29202-conus-R0000615.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/17497-conus-R0000616.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/253336-conus-R0000617.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/11695-conus-R0000618.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/982355-conus-R0000619.jpg" alt="orange tree" />
+        </div>
+        
+        <div class="grid__item">
+            <img src="/images/923361-conus-R0000620.jpg" alt="orange tree" />
+        </div>
 </div>
 
 
-    <div class="masonry gutterless">
-        {% for item in messages %}<!-- http://w3bits.com/labs/css-masonry/3/ -->
-		<div class="brick">
-				<img src="{{item.imageurl}}">
-          <div class="bottom-left"><h3><span>{{item.name}}</span></h3></div>
-			</div>
-      {% endfor %}
-		</div>
-	</div>
     <div class="span12">
         <div class="table-responsive">
             <table class="table" data-sort="table">
