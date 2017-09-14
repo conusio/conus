@@ -29,7 +29,7 @@
                         :query {:client_id (:client-id client-config)
                                 :response_type "code"
                                 :redirect_uri "http://localhost:3000/oauthcallback"
-                                :scope "user"}}
+                                :scope "read:user"}}
    :access-token-uri {:url "https://github.com/login/oauth/access_token"
                       :query {:client_id (:client-id client-config)
                               :client_secret (:client-secret client-config)
