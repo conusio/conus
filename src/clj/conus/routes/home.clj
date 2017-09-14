@@ -108,6 +108,8 @@
 
   ;; for anything else, you need to be logged in.
   (POST "/" request (friend/authorize #{:conus.middleware/user} (save-message! request)))
+  (POST "/user/:user" [user :as request] (friend/authorize #{:conus.middleware/user} (save-message! request))
+        (redirect (str "/user/" user)))
   (GET "/user" request (friend/authorize #{:conus.middleware/user} (user-list)))
   (GET "/user/:user" [user]  (friend/authorize #{:conus.middleware/user} (user-page user)))
   (POST "/upload" [file]
