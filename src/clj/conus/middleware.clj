@@ -14,7 +14,8 @@
             [clj-http.client :as client]
             [clojure.data.json :as json]
             [cemerick.friend :as friend]
-            [taoensso.timbre :as timbre])
+            [taoensso.timbre :as timbre]
+            [conus.db.core :as db])
   (:import [javax.servlet ServletContext]))
 
 (def client-config
@@ -64,7 +65,6 @@
       (:access-token (nth (keys authentications) index))))) ;; i think the default value of index being 0 is a bug. it means that if some access-tokens become invalid, it'll choose the *oldest* access-token, not the most recent.
 
 (defn get-user-info
-  "Github API call for the current authenticated users repository list."
   [access-token]
   (let [url (str "https://api.github.com/user?access_token=" access-token)
         response (try  (client/get url {:accept :json})
@@ -86,7 +86,7 @@
                          :timestamp (java.util.Date.)}]
               (when-not (contains? (set (flatten (map vals (db/get-logins)))) (:login user))
                 (do
-                  (conus.db.core/save-user! user)
+                  (db/save-user! user)
                   (log/info "(db/save-user! was called")
                   )))))
     (handler request)))
