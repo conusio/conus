@@ -97,9 +97,9 @@
 
 
 (defn user-product-page [user user-product]
-  (let [_ (log/info {:messages (db/get-thing-by-login-and-name {:login user :name user-product})})])
+  (let [_ (log/info {:thing (db/get-thing-by-login-and-name {:login user :name user-product})})])
   (layout/render "user-product-page.html"
-                 {:messages (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product}))
+                 {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product}))
 
 (defroutes home-routes
   ;; you can view the home page, and view and share links to products without being logged in.
