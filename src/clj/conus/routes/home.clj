@@ -20,7 +20,7 @@
 (defn home-page [{:keys [flash]}]
   (layout/render
     "home.html"
-    (merge {:messages (fix-url-commas (db/get-for-home-page))}
+    (merge {:messages (fix-url-commas (reverse (sort-by :timestamp (db/get-for-home-page))))}
            (select-keys flash [:name :message :errors]))))
 
 (def message-schema
