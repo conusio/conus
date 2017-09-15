@@ -113,10 +113,9 @@
 <div id="columns">
     {% for item in messages %}
     <figure>
-        <a href="{{item.email}}/{{item.url-name}}">
+        <a href="{{item.login}}/{{item.url-name}}">
             <img src="{{item.imageurl}}">
-            <h3> testing </h3>
-	          <figcaption><a href="{{item.email}}/{{item.url-name}}">{{item.name}}</a></figcaption>
+	          <figcaption><a href="{{item.login}}/{{item.url-name}}">{{item.name}}</a></figcaption>
         </a>
 	  </figure>
     {% endfor %}
@@ -136,7 +135,7 @@
         {% endfor %}
     </tbody>
 </table>
-<form method="POST" enctype="multipart/form-data" action="/">
+<form method="POST" enctype="multipart/form-data" action="/user/{{user}}">
     {% csrf-field %}
     <p>
         Name:
@@ -185,17 +184,6 @@
     </p>
     {% if errors.imageurl %}
     <div class="alert alert-danger">{{errors.imageurl|join}}</div>
-    {% endif %}
-
-    <p>
-        Email:
-        <textarea class="form-control"
-                  rows="4"
-                  cols="50"
-                  name="email">{{email}}</textarea>
-    </p>
-    {% if errors.email %}
-    <div class="alert alert-danger">{{errors.email|join}}</div>
     {% endif %}
 
     <input type="submit" class="btn btn-primary" value="submit" />

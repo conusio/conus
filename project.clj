@@ -27,7 +27,11 @@
                  [ring/ring-defaults "0.2.1"]
                  [selmer "1.10.0"]
                  [mysql/mysql-connector-java "5.1.6"]
-                 [org.clojure/java.jdbc "0.7.1"]]
+                 [org.clojure/java.jdbc "0.7.1"]
+                 [clojusc/friend-oauth2 "0.2.0"]
+                 [com.taoensso/timbre "4.1.0"]
+                 [com.cemerick/url "0.1.1"]
+                 [ch.qos.logback/logback-classic "1.1.3"]]
 
   :min-lein-version "2.0.0"
 

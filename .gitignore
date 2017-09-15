@@ -18,3 +18,5 @@ profiles.clj
 /resources/public/images
 # emacs auto-save files
 .#*
+# storing ssl creds here:
+keystore.jks

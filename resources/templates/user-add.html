@@ -18,13 +18,13 @@
             {% for item in messages %}
             <tr>
                 <td>{{item.timestamp|date:"yyyy-MM-dd HH:mm"}}</td>
-                <td><a href="user/{{item.email}}/{{item.name}}">{{item.name}}</a></td>
+                <td><a href="user/{{item.login}}/{{item.name}}">{{item.name}}</a></td>
                 <td>{{item.description}}</td>
                 <td>{{item.askingprice}}</td>
                 <td><a href="{{item.producturl}}">*</a></td>
                 <td>{{item.imageurl}}</td>
 
-                <td><a href="user/{{item.email}}">{{item.email}}</a></td>
+                <td><a href="user/{{item.login}}">{{item.login}}</a></td>
             </tr>
             {% endfor %}
             </tbody>
@@ -89,17 +89,6 @@
                 </p>
                 {% if errors.imageurl %}
                 <div class="alert alert-danger">{{errors.imageurl|join}}</div>
-                {% endif %}
-
-                <p>
-                    Email:
-                <textarea class="form-control"
-                          rows="4"
-                          cols="50"
-                          name="email">{{email}}</textarea>
-                </p>
-                {% if errors.email %}
-                <div class="alert alert-danger">{{errors.email|join}}</div>
                 {% endif %}
 
                 <input type="submit" class="btn btn-primary" value="submit" />

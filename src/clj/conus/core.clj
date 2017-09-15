@@ -6,22 +6,45 @@
             [conus.config :refer [env]]
             [clojure.tools.cli :refer [parse-opts]]
             [clojure.tools.logging :as log]
-            [mount.core :as mount])
+            [mount.core :as mount]
+            [clojure.java.io :as io])
+  (:import
+   (java.security KeyStore)
+   (java.util TimeZone)
+   (org.joda.time DateTimeZone))
   (:gen-class))
+
+
+(def ssl-options
+  {:port              443
+   :keystore          "keystore.jks"
+   :keystore-password (get (System/getenv) "KEYSTORE_PASSWORD")})
+
+(defn keystore [file pass]
+  (doto (KeyStore/getInstance "JKS")
+    (.load (io/input-stream (io/file file)) (.toCharArray pass))))
 
 (def cli-options
   [["-p" "--port PORT" "Port number"
     :parse-fn #(Integer/parseInt %)]])
 
 (mount/defstate ^{:on-reload :noop}
-                http-server
-                :start
-                (http/start
-                  (-> env
-                      (assoc :handler (handler/app))
-                      (update :port #(or (-> env :options :port) %))))
-                :stop
-                (http/stop http-server))
+  http-server
+  :start
+  (http/start
+   (merge
+    (-> env
+        (assoc :handler (handler/app))
+        (update :port #(or (-> env :options :port) %)))
+    (if (:ignore-http env)
+      {}
+      {:port         nil          ;disables access on HTTP port
+       :ssl-port     (:port ssl-options)
+       :keystore     (keystore (:keystore ssl-options) (:keystore-password ssl-options))
+       :key-password (:keystore-password ssl-options)})))
+  :stop
+  (http/stop http-server))
+
 
 (mount/defstate ^{:on-reload :noop}
                 repl-server

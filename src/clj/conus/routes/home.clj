@@ -6,18 +6,23 @@
             [clojure.java.io :as io]
             [clojure.tools.logging :as log]
             [conus.db.core :as db]
-            [struct.core :as st])
+            [struct.core :as st]
+            [conus.middleware :as mid]
+            [cemerick.url :as url]
+            [cemerick.friend :as friend]
+            [conus.config :refer [env]]
+            [taoensso.timbre :as timbre])
   (:import [java.io File FileInputStream FileOutputStream]))
 
 ;; https://github.com/conusio/conus/issues/7
-(defn fix-url-commas [items]
+(defn encode-urls [items]
   (for [item items]
-    (assoc item :url-name (clojure.string/replace (:name item) #"," "%2c"))))
+    (assoc item :url-name (url/url-encode (:name item)) )))
 
 (defn home-page [{:keys [flash]}]
   (layout/render
     "home.html"
-    (merge {:messages (fix-url-commas (db/get-messages))}
+    (merge {:messages (encode-urls (reverse (sort-by :timestamp (db/get-for-home-page))))}
            (select-keys flash [:name :message :errors]))))
 
 (def message-schema
@@ -62,6 +67,12 @@
 (defn upload-file-helper! [params random-prefix]
   (when (not= "" (get-in params [:file :filename])) (upload-file! resource-path (:file params) random-prefix)))
 
+(defn get-owner [request]
+  (if (:ignore-http env)
+    1
+    (let [user (mid/get-user-info (mid/get-token request))]
+      (:id (db/get-owner-from-login {:login (:login user)}))))) ;; this is also messy
+
 (defn save-message! [{:keys [params] :as request}]
   (let [random-prefix (str (rand-int 1000000) "-conus-")
         _ (log/info "the http request is" request)
@@ -72,43 +83,47 @@
           (assoc :flash (assoc fixed-params :errors errors)))
       (do
         (db/save-message!
-         (assoc fixed-params :timestamp (java.util.Date.)))
+         (assoc fixed-params :timestamp (java.util.Date.) :email (get-owner request)))
+        (db/save-thing!
+         (assoc fixed-params :owner (get-owner request) :timestamp (java.util.Date.)))
         (response/found "/")))))
 
 (defn about-page []
   (layout/render "about.html"))
 
 (defn user-list []
-  (let [_ (log/info "get-messages:" {:messages (distinct (map #(:email %) (db/get-messages)))})])
   (layout/render "user.html"
-                 {:messages (distinct (map #(:email %) (db/get-messages)))}))
+                 {:messages (map :login (db/get-users))}))
 
 (defn user-page [user]
-  (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
   (layout/render "user-page.html"
-                 {:messages (filter #(= (str user) (:email %)) (fix-url-commas (db/get-messages))) :user user :email user}))
+                 {:messages (db/get-things-by-owner {:owner (:id  (db/get-owner-from-login {:login user}))}) :user user :email user})) ;; TODO fix messy logic through table join
 
 
 (defn user-product-page [user user-product]
-  (let [_ (log/info {:messages (filter #(= (str user) (:email %)) (db/get-messages))})])
+  (let [_ (log/info {:thing (db/get-thing-by-login-and-name {:login user :name user-product})})])
   (layout/render "user-product-page.html"
-                 {:messages (filter #(and
-                                      (= (str user) (:email %))
-                                      (= (str user-product) (:name %)))
-                                    (db/get-messages)) :user user :name user-product}))
+                 {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product}))
+
+(defn check-oauth [page]
+  (if (:ignore-http env)
+    page
+    (friend/authorize #{:conus.middleware/user} page)))
 
 (defroutes home-routes
-  (GET "/" request (home-page request))
-  (POST "/" request (save-message! request))
-  (GET "/user" request (user-list))
-  (GET "/user/:user" [user] (user-page user))
+  ;; you can view the home page, and view and share links to products without being logged in.
   (GET "/user/:user/:user-product" [user user-product] (user-product-page user user-product))
-  (GET "/about" [] (about-page))
-  (GET "/upload" []
-       (layout/render "upload.html"))
+  (GET "/" request (home-page request))
+
+  ;; for anything else, you need to be logged in.
+  (POST "/" request   (check-oauth (save-message! request)))
+  (POST "/user/:user" [user :as request] (check-oauth (save-message! request))
+        (redirect (str "/user/" user)))
+  (GET "/user" request (check-oauth (user-list)))
+  (GET "/user/:user" [user]  (check-oauth (user-page user)))
   (POST "/upload" [file]
-        (upload-file! resource-path file)
-        (redirect (str "/anything/" (:filename file))))
+        (check-oauth  (upload-file! resource-path file))
+        (check-oauth (redirect (str "/anything/" (:filename file)))))
   (GET "/anything/:filename" [filename]
        (let [_  (log/info "file-response: " (file-response (str resource-path filename)))])
-       (file-response (str resource-path filename))))
+       (check-oauth (file-response (str resource-path filename)))))

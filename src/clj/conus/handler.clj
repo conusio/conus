@@ -5,7 +5,8 @@
             [compojure.route :as route]
             [conus.env :refer [defaults]]
             [mount.core :as mount]
-            [conus.middleware :as middleware]))
+            [conus.middleware :as middleware]
+            [cemerick.friend :as friend]))
 
 (mount/defstate init-app
                 :start ((or (:init defaults) identity))
@@ -13,7 +14,8 @@
 
 (def app-routes
   (routes
-    (-> #'home-routes
+   (-> #'home-routes
+        (friend/authenticate conus.middleware/auth-opts)
         (wrap-routes middleware/wrap-csrf)
         (wrap-routes middleware/wrap-formats))
     (route/not-found
