@@ -19,22 +19,22 @@
   (:import [javax.servlet ServletContext]))
 
 (def client-config
-  {:client-id         "68a83e5d5441d1419199"
-   :client-secret     "301641a4c8ca1818269d9571694c559e5cf31e66"
-   :callback {:domain "http://localhost:3000" ;; set in config: if dev, then localhost:3000, else rely on env var
+  {:client-id  (get (System/getenv) "CONUS_GITHUB_CLIENT_ID")
+   :client-secret (get (System/getenv) "CONUS_GITHUB_CLIENT_SECRET")
+   :callback {:domain "http://conus.io" ;; set in config: if dev, then localhost:3000, else rely on env var
               :path "/oauthcallback"}})
 
 (def uri-config
   {:authentication-uri {:url "https://github.com/login/oauth/authorize"
                         :query {:client_id (:client-id client-config)
                                 :response_type "code"
-                                :redirect_uri "http://localhost:3000/oauthcallback"
+                                :redirect_uri "http://conus.io/oauthcallback"
                                 :scope "read:user"}}
    :access-token-uri {:url "https://github.com/login/oauth/access_token"
                       :query {:client_id (:client-id client-config)
                               :client_secret (:client-secret client-config)
                               :grant_type "authorization_code"
-                              :redirect_uri  "http://localhost:3000/oauthcallback"}}})
+                              :redirect_uri  "http://conus.io/oauthcallback"}}})
 
 (defn credential-fn
   [token]
