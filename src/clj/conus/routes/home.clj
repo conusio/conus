@@ -69,7 +69,7 @@
 
 (defn get-owner [request]
   (if (:ignore-http env)
-    99
+    1
     (let [user (mid/get-user-info (mid/get-token request))]
       (:id (db/get-owner-from-login {:login (:login user)}))))) ;; this is also messy
 

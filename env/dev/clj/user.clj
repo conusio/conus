@@ -24,14 +24,16 @@
   (stop)
   (start))
 
+(def sample-user
+  {:id 1 :name "the hedonist" :email "h@h.com" :login "hedonist" :location "hell" :timestamp (java.util.Date.) :githubid 39})
 
-(def fixture-thing-data
+(def sample-thing
   {:name "ipad"
    :description "an ipad"
    :askingprice "200"
-   :imageurl ".png"
-   :producturl "lemonparty.org"
-   :owner 1 ;; uhh
+   :imageurl ""
+   :producturl "whizzy.com"
+   :owner 1
    :timestamp (java.util.Date.)})
 
 
