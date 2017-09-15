@@ -1,76 +1,115 @@
 {% extends "base.html" %}
 {% block content %}
 <style type='text/css'>
- body {
-     min-height: 1000px;
- }
- #columns {
-	   column-width: 200px;
-	   column-gap: 5px;
-     width: 90%;
-	   max-width: 1100px;
-	   margin: 50px auto;
- }
-
- div#columns figure {
-	   background: #252830;
-	   margin: 0 2px 5px;
-	   padding: 10px;
-	   padding-bottom: 10px;
-	   transition: opacity .4s ease-in-out;
-     display: inline-block;
-     column-break-inside: avoid;
- }
-
- div#columns figure img {
-	   width: 100%; height: auto;
-     border-radius: 5%;
-     overflow:hidden;
- }
-
- div#columns figure figcaption {
-     font-size: .9rem;
-	   color: #444;
-     line-height: 1.5;
- }
-
- div#columns small { 
-     font-size: 1rem;
-     float: right; 
-     text-transform: uppercase;
-     color: #aaa;
- } 
-
- div#columns small a { 
-     color: #666; 
-     text-decoration: none; 
-     transition: .4s color;
- }
-
-
- @media screen and (max-width: 750px) { 
-     #columns { column-gap: 0px; }
-     #columns figure { width: 100%; }
- }
  img {
-     filter:         url(~"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
-     -webkit-filter: grayscale(70%);
-     -moz-filter:    grayscale(70%);
-     -ms-filter:     grayscale(70%);
-     -o-filter:      grayscale(70%);
-     filter: gray; 
+     max-width: 100%;
+     vertical-align: bottom;
  }
- img:hover {
-     filter: none;
-     cursor: pointer;
+
+ .wrapper {
+     width: 92.5%;
+     padding: 1em;
+ }
+
+
+
+ .masonry {
+     -moz-transition: all .5s ease-in-out;
+     -webkit-transition: all .5s ease-in-out;
+     transition: all .5s ease-in-out;
+     -moz-column-gap: 30px;
+     -webkit-column-gap: 30px;
+     column-gap: 30px;
+     -moz-column-fill: initial;
+     -webkit-column-fill: initial;
+     column-fill: initial;
+ }
+ .masonry .brick {
+     margin-bottom: 30px;
+     position: relative;
+ }
+ .masonry .brick img {
+     -moz-transition: all .5s ease-in-out;
+     -webkit-transition: all .5s ease-in-out;
+     transition: all .5s ease-in-out;
+ }
+ .masonry .brick:hover img {
+     opacity: .75;
+ }
+ .masonry.gutterless {
+     -moz-column-gap: 0;
+     -webkit-column-gap: 0;
+     column-gap: 0;
+ }
+ .masonry.gutterless .brick {
+     margin-bottom: 0;
+     position: relative;
+ }
+
+ .span {
+     -moz-column-span: all;
+     -webkit-column-span: all;
+     column-span: all;
+     *margin: 30px 0;
+ }
+ h3 span { 
+     color: white; 
+     font: bold 24px/45px Helvetica, Sans-Serif; 
+     letter-spacing: -1px;  
+     background: rgb(0, 0, 0); /* fallback color */
+     background: rgba(0, 0, 0, 0.7);
+     padding: 10px; 
+ }
+ @media only screen and (min-width: 1024px) {
+     .desc {
+         font-size: 1.25em;
+     }
+
+     .intro {
+         letter-spacing: 1px;
+     }
+
+     .wrapper {
+         width: 80%;
+         padding: 2em;
+     }
+
+     .masonry {
+         -moz-column-count: 3;
+         -webkit-column-count: 3;
+         column-count: 3;
+     }
+ }
+ @media only screen and (min-width: 768px) and (max-width: 1023px) {
+     .wrapper {
+         width: 85%;
+         padding: 1.5em;
+     }
+
+     .masonry {
+         -moz-column-count: 2;
+         -webkit-column-count: 2;
+         column-count: 2;
+     }
+ }
+ .bottom-left {
+     position: absolute;
+     bottom: 8px;
+     left: 16px;
  }
 </style>
 
-  <div class="dashhead-titles">
-    <h6 class="dashhead-subtitle">CONUS</h6>
-    <h2 class="dashhead-title">{{user}}</h2>
-  </div>
+<div class="masonry gutterless">
+    {% for item in messages %}<!-- http://w3bits.com/labs/css-masonry/3/ -->
+			<div class="brick">
+				  <img src="{{item.imageurl}}">
+          <div class="bottom-left"><h3><span>{{item.name}}</span></h3></div>
+			</div>
+      {% endfor %}
+		</div>
+	</div>
 
+<!-- 
 <div id="columns">
     {% for item in messages %}
     <figure>
@@ -81,7 +120,7 @@
 	  </figure>
     {% endfor %}
 </div>
-
+-->
 
 <table class="table" data-sort="table">
     <tbody>
@@ -90,7 +129,7 @@
             <td>{{item.name}}</td>
             <td>{{item.description}}</td>
             <td>{{item.askingprice}}</td>
-            <td>{{item.producturl}}</td>
+            <td><a href="{{item.producturl}}">product link</a></td>
 
         </tr>
         {% endfor %}
