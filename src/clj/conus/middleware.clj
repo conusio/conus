@@ -19,8 +19,8 @@
   (:import [javax.servlet ServletContext]))
 
 (def client-config
-  {:client-id  (get (System/getenv) "CONUS_GITHUB_CLIENT_ID")
-   :client-secret (get (System/getenv) "CONUS_GITHUB_CLIENT_SECRET")
+  {:client-id  (or  (get (System/getenv) "CONUS_GITHUB_CLIENT_ID") "dummy") ;; HACK
+   :client-secret (or  (get (System/getenv) "CONUS_GITHUB_CLIENT_SECRET") "dummy") ;; HACK
    :callback {:domain "https://conus.io"
               :path "/oauthcallback"}})
 
