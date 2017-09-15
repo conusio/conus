@@ -3,6 +3,7 @@
             [luminus-migrations.core :as migrations]
             [conus.db.core :as db]
             [conus.middleware :as mid]
+            [conus.config :refer [env]]
             conus.core))
 
 

@@ -10,6 +10,7 @@
             [conus.middleware :as mid]
             [cemerick.url :as url]
             [cemerick.friend :as friend]
+            [conus.config :refer [env]]
             [taoensso.timbre :as timbre])
   (:import [java.io File FileInputStream FileOutputStream]))
 
@@ -67,8 +68,10 @@
   (when (not= "" (get-in params [:file :filename])) (upload-file! resource-path (:file params) random-prefix)))
 
 (defn get-owner [request]
-  (let [user (mid/get-user-info (mid/get-token request))]
-    (:id (db/get-owner-from-login {:login (:login user)})))) ;; this is also messy
+  (if (:ignore-http env)
+    99
+    (let [user (mid/get-user-info (mid/get-token request))]
+      (:id (db/get-owner-from-login {:login (:login user)}))))) ;; this is also messy
 
 (defn save-message! [{:keys [params] :as request}]
   (let [random-prefix (str (rand-int 1000000) "-conus-")
@@ -102,20 +105,25 @@
   (layout/render "user-product-page.html"
                  {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product}))
 
+(defn check-oauth [page]
+  (if (:ignore-http env)
+    page
+    (friend/authorize #{:conus.middleware/user} page)))
+
 (defroutes home-routes
   ;; you can view the home page, and view and share links to products without being logged in.
   (GET "/user/:user/:user-product" [user user-product] (user-product-page user user-product))
   (GET "/" request (home-page request))
 
   ;; for anything else, you need to be logged in.
-  (POST "/" request (friend/authorize #{:conus.middleware/user} (save-message! request)))
-  (POST "/user/:user" [user :as request] (friend/authorize #{:conus.middleware/user} (save-message! request))
+  (POST "/" request   (check-oauth (save-message! request)))
+  (POST "/user/:user" [user :as request] (check-oauth (save-message! request))
         (redirect (str "/user/" user)))
-  (GET "/user" request (friend/authorize #{:conus.middleware/user} (user-list)))
-  (GET "/user/:user" [user]  (friend/authorize #{:conus.middleware/user} (user-page user)))
+  (GET "/user" request (check-oauth (user-list)))
+  (GET "/user/:user" [user]  (check-oauth (user-page user)))
   (POST "/upload" [file]
-        (friend/authorize #{:conus.middleware/user}  (upload-file! resource-path file))
-        (friend/authorize #{:conus.middleware/user} (redirect (str "/anything/" (:filename file)))))
+        (check-oauth  (upload-file! resource-path file))
+        (check-oauth (redirect (str "/anything/" (:filename file)))))
   (GET "/anything/:filename" [filename]
        (let [_  (log/info "file-response: " (file-response (str resource-path filename)))])
-       (friend/authorize #{:conus.middleware/user} (file-response (str resource-path filename)))))
+       (check-oauth (file-response (str resource-path filename)))))

@@ -76,18 +76,20 @@
   [handler]
   (fn [request]
     (log/info "wrap-auth-user-and-save-to-do! was called")
-    (if-let [access-token  (get-token request)]
-      (if-let [user-info  (get-user-info access-token)]
-        (let  [user     {:login     (:login user-info)
-                         :githubid  (:id user-info)
-                         :name      (:name user-info)
-                         :email     (:email user-info)
-                         :location  (:location user-info)
-                         :timestamp (java.util.Date.)}]
-              (when-not (contains? (set (flatten (map vals (db/get-logins)))) (:login user))
-                (do
-                  (db/save-user! user)
-                  (log/info "(db/save-user!) was called"))))))
+    (if (:ignore-http env)
+      (log/info "ignoring http.")
+      (if-let [access-token  (get-token request)]
+        (if-let [user-info  (get-user-info access-token)]
+          (let  [user     {:login     (:login user-info)
+                           :githubid  (:id user-info)
+                           :name      (:name user-info)
+                           :email     (:email user-info)
+                           :location  (:location user-info)
+                           :timestamp (java.util.Date.)}]
+            (when-not (contains? (set (flatten (map vals (db/get-logins)))) (:login user))
+              (do
+                (db/save-user! user)
+                (log/info "(db/save-user!) was called")))))))
     (handler request)))
 
 (defn wrap-context [handler]
