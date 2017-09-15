@@ -8,19 +8,20 @@
             [conus.db.core :as db]
             [struct.core :as st]
             [conus.middleware :as mid]
+            [cemerick.url :as url]
             [cemerick.friend :as friend]
             [taoensso.timbre :as timbre])
   (:import [java.io File FileInputStream FileOutputStream]))
 
 ;; https://github.com/conusio/conus/issues/7
-(defn fix-url-commas [items]
+(defn encode-urls [items]
   (for [item items]
-    (assoc item :url-name (clojure.string/replace (:name item) #"," "%2c"))))
+    (assoc item :url-name (url/url-encode (:name item)) )))
 
 (defn home-page [{:keys [flash]}]
   (layout/render
     "home.html"
-    (merge {:messages (fix-url-commas (reverse (sort-by :timestamp (db/get-for-home-page))))}
+    (merge {:messages (encode-urls (reverse (sort-by :timestamp (db/get-for-home-page))))}
            (select-keys flash [:name :message :errors]))))
 
 (def message-schema
