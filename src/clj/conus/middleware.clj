@@ -76,7 +76,7 @@
   [handler]
   (fn [request]
     (log/info "wrap-auth-user-and-save-to-do! was called")
-    (if-let [access-token  (get-token request)] ;; when these are nil, a nil user gets put into the db. HACK FIXME
+    (if-let [access-token  (get-token request)]
       (if-let [user-info  (get-user-info access-token)]
         (let  [user     {:login     (:login user-info)
                          :githubid  (:id user-info)
@@ -87,8 +87,7 @@
               (when-not (contains? (set (flatten (map vals (db/get-logins)))) (:login user))
                 (do
                   (db/save-user! user)
-                  (log/info "(db/save-user! was called")
-                  )))))
+                  (log/info "(db/save-user!) was called"))))))
     (handler request)))
 
 (defn wrap-context [handler]

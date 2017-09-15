@@ -24,12 +24,13 @@
   (start))
 
 
-(def fixture-data-maybe
+(def fixture-thing-data
   {:name "ipad"
    :description "an ipad"
    :askingprice "200"
    :imageurl ".png"
    :producturl "lemonparty.org"
+   :owner 1 ;; uhh
    :timestamp (java.util.Date.)})
 
 
