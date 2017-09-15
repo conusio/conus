@@ -31,8 +31,8 @@ git checkout master
 git pull
 lein uberjar
 sudo -E java -jar target/uberjar/conus.jar &
-# for the curious, `sudo` is needed because the app runs on port 80.
-# -E means "keep the user's environment, i.e. env vars." we want DATABASE_URL and LEIN_ROOT
+# for the curious, `sudo` is needed because the app runs on port 443.
+# -E means "keep the user's environment, i.e. env vars." we want DATABASE_URL, LEIN_ROOT, and a few others.
 # & is for running asynchronously, so the job runs in the background
 ```
 
