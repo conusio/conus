@@ -21,20 +21,20 @@
 (def client-config
   {:client-id  (get (System/getenv) "CONUS_GITHUB_CLIENT_ID")
    :client-secret (get (System/getenv) "CONUS_GITHUB_CLIENT_SECRET")
-   :callback {:domain "http://conus.io" ;; set in config: if dev, then localhost:3000, else rely on env var
+   :callback {:domain "https://conus.io"
               :path "/oauthcallback"}})
 
 (def uri-config
   {:authentication-uri {:url "https://github.com/login/oauth/authorize"
                         :query {:client_id (:client-id client-config)
                                 :response_type "code"
-                                :redirect_uri "http://conus.io/oauthcallback"
+                                :redirect_uri "https://conus.io/oauthcallback"
                                 :scope "read:user"}}
    :access-token-uri {:url "https://github.com/login/oauth/access_token"
                       :query {:client_id (:client-id client-config)
                               :client_secret (:client-secret client-config)
                               :grant_type "authorization_code"
-                              :redirect_uri  "http://conus.io/oauthcallback"}}})
+                              :redirect_uri  "https://conus.io/oauthcallback"}}})
 
 (defn credential-fn
   [token]
