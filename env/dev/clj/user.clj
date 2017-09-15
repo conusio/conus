@@ -31,3 +31,16 @@
    :imageurl ".png"
    :producturl "lemonparty.org"
    :timestamp (java.util.Date.)})
+
+
+(defn conus-table->things-table []
+  (for [x (db/get-messages)]
+    (let [owner (condp = (:email x)
+                  "matt@example.com"     1
+                  "elliott@example.com"  2
+                  "spencer@example.com"  3)]
+      (assoc x :login (:email x) :location "" :githubid "" :owner owner))))
+
+(defn put-converted-conus-table-into-mysql []
+  (for [x (conus-table->things-table)]
+    (db/save-thing! x)))
