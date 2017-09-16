@@ -14,10 +14,9 @@
             [taoensso.timbre :as timbre])
   (:import [java.io File FileInputStream FileOutputStream]))
 
-;; https://github.com/conusio/conus/issues/7
 (defn encode-urls [items]
   (for [item items]
-    (assoc item :url-name (url/url-encode (:name item)) )))
+    (assoc item :url-name (url/url-encode (:name item)))))
 
 (defn home-page [{:keys [flash]}]
   (layout/render
@@ -44,9 +43,6 @@
   "uploads a file to the target folder
    when :create-path? flag is set to true then the target path will be created"
   [path {:keys [tempfile size filename]} random-prefix]
-  (let [
-        _ (log/info "tempfile: " tempfile
-                    " \nfileoutputstream: "(file-path path (str random-prefix  filename)))])
   (try
     (with-open [in (new FileInputStream tempfile)
                 out (new FileOutputStream (file-path path (str random-prefix filename)))]
@@ -61,7 +57,7 @@
 
 (defn fix-params [params random-prefix]
   (as-> params $
-    (assoc $ :imageurl (str "/images/" (str random-prefix (get-in params [:file :filename]))))
+    (assoc $ :imageurl (str "/images/" random-prefix (get-in params [:file :filename])))
     (assoc $ :name (clojure.string/trim (:name $)))))
 
 (defn upload-file-helper! [params random-prefix]
@@ -75,7 +71,6 @@
 
 (defn save-message! [{:keys [params] :as request}]
   (let [random-prefix (str (rand-int 1000000) "-conus-")
-        _ (log/info "the http request is" request)
         _ (upload-file-helper! params random-prefix)
         fixed-params (fix-params params random-prefix)]
     (if-let [errors (validate-message fixed-params)]
@@ -101,7 +96,6 @@
 
 
 (defn user-product-page [user user-product]
-  (let [_ (log/info {:thing (db/get-thing-by-login-and-name {:login user :name user-product})})])
   (layout/render "user-product-page.html"
                  {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product}))
 
