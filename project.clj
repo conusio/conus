@@ -35,7 +35,7 @@
 
   :min-lein-version "2.0.0"
 
-  :jvm-opts ["-server" "-Dconf=.lein-env"]
+  :jvm-opts ["-server"]
   :source-paths ["src/clj"]
   :resource-paths ["resources"]
   :target-path "target/%s/"
@@ -51,10 +51,10 @@
              :aot :all
              :uberjar-name "conus.jar"
              :source-paths ["env/prod/clj"]
-             :resource-paths ["env/prod/resources"]}
+             :resource-paths ["env/prod/resources" "resources"]}
 
-   :dev           [:project/dev :profiles/dev]
-   :test          [:project/dev :project/test :profiles/test]
+   :dev           [:project/dev]
+   :test          [:project/test]
 
    :project/dev  {:dependencies [[prone "1.1.2"]
                                  [ring/ring-mock "0.3.0"]
@@ -67,6 +67,15 @@
                   :repl-options {:init-ns user}
                   :injections [(require 'pjstadig.humane-test-output)
                                (pjstadig.humane-test-output/activate!)]}
-   :project/test {:resource-paths ["env/dev/resources" "env/test/resources"]}
-   :profiles/dev {}
-   :profiles/test {}})
+
+   :project/test {:resource-paths ["env/test/resources"]
+                  :dependencies [[prone "1.1.2"]
+                                 [ring/ring-mock "0.3.0"]
+                                 [ring/ring-devel "1.5.0"]
+                                 [pjstadig/humane-test-output "0.8.1"]]
+                  :plugins      [[com.jakemccrary/lein-test-refresh "0.14.0"]]
+
+                  :source-paths ["env/dev/clj" "test/clj"]
+                  :repl-options {:init-ns user}
+                  :injections [(require 'pjstadig.humane-test-output)
+                               (pjstadig.humane-test-output/activate!)]}})
