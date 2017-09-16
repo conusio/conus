@@ -51,7 +51,7 @@
              :aot :all
              :uberjar-name "conus.jar"
              :source-paths ["env/prod/clj"]
-             :resource-paths ["env/prod/resources"]}
+             :resource-paths ["env/prod/resources" "resources"]}
 
    :dev           [:project/dev]
    :test          [:project/test]
