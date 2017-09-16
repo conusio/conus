@@ -93,7 +93,7 @@
 
 (defn user-list []
   (layout/render "user.html"
-                 {:messages (map :login (db/get-users))}))
+                 {:messages (map :login (reverse (sort-by :timestamp (db/get-users))))}))
 
 (defn user-page [user]
   (layout/render "user-page.html"
