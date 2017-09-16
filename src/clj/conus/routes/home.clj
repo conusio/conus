@@ -40,10 +40,17 @@
    "utf-8"))
 
 (defn upload-file!
+  [path {:keys [tempfile size filename]} random-prefix]
+  (io/copy tempfile (io/file (str path random-prefix filename))))
+
+#_(defn upload-file!
   "uploads a file to the target folder
    when :create-path? flag is set to true then the target path will be created"
   [path {:keys [tempfile size filename]} random-prefix]
   (try
+    (log/info "path is " path
+              "tempfile is " tempfile
+              "filename is " filename)
     (with-open [in (new FileInputStream tempfile)
                 out (new FileOutputStream (file-path path (str random-prefix filename)))]
       (let [source (.getChannel in)
