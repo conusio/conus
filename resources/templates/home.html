@@ -1,43 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="dashhead-titles">
-    <h6 class="dashhead-subtitle">CONUS</h6>
-    <h2 class="dashhead-title">Recently Added</h2>
-</div>
 
-    <div class="span12">
-        <div class="table-responsive">
-            <table class="table" data-sort="table">
-            <thead>
-                <tr>
-                    <th>date</th>
-                    <th>name</th>
-                    <th>description</th>
-                    <th>asking price</th>
-                    <th>image</th>
-                    <th><a href="user">users</a></th>
-                    <th>product url</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for item in messages %}
-            <tr>
-                <td>{{item.timestamp|date:"yyyy-MM-dd HH:mm"}}</td>
-                <td><a href="/user/{{item.login}}/{{item.url-name}}">{{item.name}}</a></td>
-                <td>{{item.description}}</td>
-                <td>{{item.askingprice}}</td>
-                <td><a href="{{item.imageurl}}">*</a></td>
-
-                <td><a href="/user/{{item.login}}">{{item.login}}</a></td>
-                <td><a href="{{item.producturl}}">{{item.producturl}}</a></td>
-            </tr>
-            {% endfor %}
-            </tbody>
-            </table>
-        </div>
-    </div>
+<div class="masonry gutterless">
+    {% for item in messages %}
+			<div class="brick">
+				  <img src="{{item.imageurl}}">
+          <div class="bottom-left"><h3><span>{{item.name}}</span></h3></div>
+			</div>
+      {% endfor %}
 </div>
-<div class="row">
-    <div class="span12">
-    </div>
 {% endblock %}
