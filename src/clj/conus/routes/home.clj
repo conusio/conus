@@ -21,7 +21,7 @@
 (defn home-page [{:keys [flash]}]
   (layout/render
     "home.html"
-    (merge {:messages (encode-urls (reverse (sort-by :timestamp (db/get-for-home-page))))}
+    (merge {:messages (encode-urls (take-last 20 (reverse (sort-by :timestamp (db/get-for-home-page)))))}
            (select-keys flash [:name :message :errors]))))
 
 (def message-schema
