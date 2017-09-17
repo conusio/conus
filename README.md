@@ -1,4 +1,4 @@
-# conus
+# conus ![build status](https://api.travis-ci.org/conusio/conus.svg?branch=master)
 
 generated using Luminus version "2.9.11.08"
 
