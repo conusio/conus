@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
+
+<style>
+ .affiliate {
+     width:190px;
+     display: block;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+
+ }
+</style>
 <div class="table-responsive">
     <table class="table" data-sort="table">
         <thead>
@@ -18,7 +29,7 @@
                 <td>{{item.name}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.askingprice}}</td>
-                <td><a href="{{item.producturl}}">buy</a></td>
+                <td><a href="{{item.producturl}}"><span class="affiliate">{{item.producturl}}</span></a></td>
             </tr>
             {% endfor %}
         </tbody>
