@@ -15,7 +15,7 @@
             {% for item in messages %}
             <tr>
                 <td>{{item.timestamp|date:"yyyy-MM-dd HH:mm"}}</td>
-                <td>{{item.name}}</td>
+                <td><a href="{{user}}/{{item.name}}">{{item.name}}</a></td>
                 <td>{{item.description}}</td>
                 <td>{{item.askingprice}}</td>
                 <td><a href="{{item.producturl}}">buy</a></td>
