@@ -1,14 +1,8 @@
 # conus ![build status](https://api.travis-ci.org/conusio/conus.svg?branch=master)
 
-generated using Luminus version "2.9.11.08"
-
-FIXME
-
 ## Prerequisites
 
-You will need [Leiningen][1] 2.0 or above installed.
-
-[1]: https://github.com/technomancy/leiningen
+lein
 
 ## Running
 
@@ -23,6 +17,14 @@ then from the repl, run
     
     
     
+## setting up fixture data
+
+TODO make this better.
+in user.clj there are examples of example data. to hand-insert, you'd call `(db/save-thing! thing-map)` and `(db/save-user! user-map)`. But it's easier to upload pictures through localhost:3000/user/hedonist , so you should just do that. 
+
+
+## when you get db errors (like "table doesn't exist") try deleting the dev db in $proj_root
+
 ## deploying to production
 
 ```bash
@@ -43,7 +45,3 @@ to have the app reload the queries.sql file, inside of `conus.db.core`, eval
 (conman/bind-connection *db* "sql/queries.sql")
 ```
 (when you're running the app via `lein repl`)
-
-## License
-
-Copyright © 2016 FIXME
