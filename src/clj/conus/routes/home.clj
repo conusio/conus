@@ -91,9 +91,12 @@
         (response/found "/")))))
 
 (defn update-message! [{:keys [params] :as request}]
-  (let [thing {:id  (Integer. (:id params))}
-        updated-thing-map  (select-keys params [:name :description :askingprice :producturl :file])]
-    (db/update-thing! (conj updated-thing-map thing))))
+  (let [id              {:id  (Integer. (:id params))}
+        random-prefix      (str (rand-int 1000000) "-conus-")
+        fixed-params       (fix-params params random-prefix)
+        updated-thing-map  (select-keys fixed-params [:name :description :askingprice :producturl :imageurl])
+        _                  (upload-file-helper! params random-prefix)]
+    (db/update-thing! (conj updated-thing-map id))))
 
 (defn about-page []
   (layout/render "about.html"))
