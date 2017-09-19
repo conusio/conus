@@ -55,20 +55,20 @@ inner join users on things.owner = users.id
 SELECT login from users
 
 -- :name get-id-of-thing :? :1
-SELECT id from things
-where name = :name AND
-      description = :description AND
-      askingprice = :askingprice AND
-      producturl = :producturl AND
-      imageurl = :imageurl;
+SELECT id
+FROM things
+WHERE name = :name
+      AND description = :description
+      AND askingprice = :askingprice
+      AND producturl = :producturl
+      AND imageurl = :imageurl;
 
 -- :name update-thing! :! :*
 -- :doc UPDATEs a thing
 UPDATE things
 SET name = :name,
-description = :description,
-askingprice = :askingprice,
-producturl = :producturl,
-imageurl = :imageurl
-WHERE
-id = :id
+    description = :description,
+    askingprice = :askingprice,
+    producturl = :producturl,
+    imageurl = :imageurl
+WHERE id = :id
