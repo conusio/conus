@@ -19,9 +19,10 @@
     (assoc item :url-name (url/url-encode (:name item)))))
 
 (defn home-page [{:keys [flash]}]
+  (let [_ (log/info (db/get-for-home-page))])
   (layout/render
     "home.html"
-    (merge {:messages (encode-urls (reverse (take-last 20 (sort-by :timestamp (db/get-for-home-page)))))}
+    (merge {:messages (encode-urls (reverse (take-last 40 (sort-by :timestamp (db/get-for-home-page)))))}
            (select-keys flash [:name :message :errors]))))
 
 (def message-schema
