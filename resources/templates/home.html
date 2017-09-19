@@ -4,7 +4,7 @@
 <div class="masonry gutterless">
     {% for item in messages %}
 			<div class="brick">
-				  <img src="{{item.imageurl}}">
+				  <img src="{{item.imageurl|default:default.png}}">
           <div class="bottom-left"><h3><span>{{item.name}}</span></h3></div>
 			</div>
       {% endfor %}

@@ -64,7 +64,7 @@
 
 (defn fix-params [params random-prefix]
   (as-> params $
-    (assoc $ :imageurl (str "/images/" random-prefix (get-in params [:file :filename])))
+    (assoc $ :imageurl (if (not (empty? (get-in params [:file :filename]))) (str "/images1/" random-prefix (get-in params [:file :filename]))))
     (assoc $ :name (clojure.string/trim (:name $)))))
 
 (defn upload-file-helper! [params random-prefix]
