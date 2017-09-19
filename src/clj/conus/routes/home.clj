@@ -91,9 +91,9 @@
         (response/found "/")))))
 
 (defn update-message! [{:keys [params] :as request}]
-  (let [thing-id (:id params)
+  (let [thing {:id  (Integer. (:id params))}
         updated-thing-map  (select-keys params [:name :description :askingprice :producturl :file])]
-    (db/update-thing! (conj updated-thing-map {:id (read-string thing-id)}))))
+    (db/update-thing! (conj updated-thing-map thing))))
 
 (defn about-page []
   (layout/render "about.html"))
