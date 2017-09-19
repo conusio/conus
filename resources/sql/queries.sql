@@ -35,7 +35,8 @@ where login = :login
 
 -- :name get-things-by-owner :? :*
 SELECT * from things
-where owner = :owner
+inner join users on things.owner = users.id
+where users.login = :login
 
 -- :name get-thing-by-login-and-name :? :1
 SELECT * from things

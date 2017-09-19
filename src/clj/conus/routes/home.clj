@@ -107,7 +107,7 @@
 
 (defn user-page [user]
   (layout/render "user-page.html"
-                 {:messages (db/get-things-by-owner {:owner (:id  (db/get-owner-from-login {:login user}))}) :user user :email user})) ;; TODO fix messy logic through table join
+                 {:messages (db/get-things-by-owner {:login user}) :user user :email user}))
 
 
 (defn user-product-page [user user-product]
