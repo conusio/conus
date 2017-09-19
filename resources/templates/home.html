@@ -3,10 +3,11 @@
 
 <div class="masonry gutterless">
     {% for item in messages %}
-			<div class="brick">
-				  <img src="{{item.imageurl|default:default.png}}">
-          <div class="bottom-left"><h3><span>{{item.name}}</span></h3></div>
-			</div>
+		<div class="brick">
+				<img src="{{item.imageurl|default:default.png}}">
+        <a href="user/{{item.login}}/{{item.name}}">
+        <div class="bottom-left"><h3><span>{{item.name}}</span></h3></div>
+		</div></a>
       {% endfor %}
 </div>
 {% endblock %}
