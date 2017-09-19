@@ -90,6 +90,11 @@
          (assoc fixed-params :owner (get-owner request) :timestamp (java.util.Date.)))
         (response/found "/")))))
 
+(defn update-message! [{:keys [params] :as request}]
+  (let [thing-id (:id params)
+        updated-thing-map  (select-keys params [:name :description :askingprice :producturl :file])]
+    (db/update-thing! (conj updated-thing-map {:id (read-string thing-id)}))))
+
 (defn about-page []
   (layout/render "about.html"))
 
@@ -120,6 +125,8 @@
   (POST "/" request   (check-oauth (save-message! request)))
   (POST "/user/:user" [user :as request] (check-oauth (save-message! request))
         (redirect (str "/user/" user)))
+  (POST "/user/:user/:user-product-page" [user-product-page user :as request] (check-oauth (update-message! request))
+        (redirect (str "/user/" user #_"/" #_user-product-page)))
   (GET "/user" request (check-oauth (user-list)))
   (GET "/user/:user" [user]  (check-oauth (user-page user)))
   (POST "/upload" [file]
