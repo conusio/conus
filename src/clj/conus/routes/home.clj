@@ -19,9 +19,10 @@
     (assoc item :url-name (url/url-encode (:name item)))))
 
 (defn home-page [{:keys [flash]}]
+  (let [_ (log/info (db/get-for-home-page))])
   (layout/render
     "home.html"
-    (merge {:messages (encode-urls (reverse (take-last 20 (sort-by :timestamp (db/get-for-home-page)))))}
+    (merge {:messages (encode-urls (reverse (take-last 40 (sort-by :timestamp (db/get-for-home-page)))))}
            (select-keys flash [:name :message :errors]))))
 
 (def message-schema
@@ -64,7 +65,7 @@
 
 (defn fix-params [params random-prefix]
   (as-> params $
-    (assoc $ :imageurl (str "/images/" random-prefix (get-in params [:file :filename])))
+    (assoc $ :imageurl (if (not (empty? (get-in params [:file :filename]))) (str "/images/" random-prefix (get-in params [:file :filename]))))
     (assoc $ :name (clojure.string/trim (:name $)))))
 
 (defn upload-file-helper! [params random-prefix]

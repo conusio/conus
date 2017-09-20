@@ -14,16 +14,18 @@
     <table class="table" data-sort="table">
         <thead>
             <tr>
+                <th>image</th>
                 <th>Date Added</th>
                 <th>Thing</th>
                 <th>Description</th>
                 <th>Asking Price</th>
-                <th>Buy Link</th>
+                <th>Buy</th>
             </tr>
         </thead>
         <tbody>
             {% for item in messages %}
             <tr>
+                <td><img src="{{item.imageurl|default:default.png}}"></td>
                 <td>{{item.timestamp|date:"yyyy-MM-dd HH:mm"}}</td>
                 <td><a href="{{user}}/{{item.name}}">{{item.name}}</a></td>
                 <td>{{item.description}}</td>
