@@ -48,3 +48,22 @@
 (defn put-converted-conus-table-into-mysql []
   (for [x (conus-table->things-table)]
     (db/save-thing! x)))
+
+;; this should be a test in db test!!!!
+#_(defn update-message! [{:keys [params] :as request}]
+  (let [thing-map {;; :id 9,
+                   :name "testman",
+                   :description "is the bestman",
+                   :askingprice "69420",
+                   :producturl "producturlman",
+                   :imageurl "gooseberg"}
+        updated-thing-map {;; :id 9,
+                           :name "updated-thing-name",
+                           :description "updated-description",
+                           :askingprice "196969",
+                           :producturl "www.updated-example.com",
+                           :imageurl "/images/416744-conus-Sheafer Snorkel.jpg "}
+        thing-id (db/get-id-of-thing thing-map)]
+    #_(db/update-name-and-description! (conj updated-thing-map thing-id))
+    )
+  )
