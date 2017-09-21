@@ -25,6 +25,12 @@
     (merge {:messages (encode-urls (reverse (take-last 40 (sort-by :timestamp (db/get-for-home-page)))))}
            (select-keys flash [:name :message :errors]))))
 
+(defn shuffle-page [{:keys [flash]}]
+  (let [_ (log/info (db/get-for-home-page))])
+  (layout/render
+   "shuffle.html"
+   (merge {:messages (encode-urls (reverse (take-last 40 (sort-by :timestamp (db/get-for-home-page)))))}
+          (select-keys flash [:name :message :errors]))))
 (def message-schema
   [#_[:name st/required st/string]
    #_[:message
@@ -65,7 +71,7 @@
 
 (defn fix-params [params random-prefix]
   (as-> params $
-    (assoc $ :imageurl (if (not (empty? (get-in params [:file :filename]))) (str "/images1/" random-prefix (get-in params [:file :filename]))))
+    (assoc $ :imageurl (if (not (empty? (get-in params [:file :filename]))) (str "/images/" random-prefix (get-in params [:file :filename]))))
     (assoc $ :name (clojure.string/trim (:name $)))))
 
 (defn upload-file-helper! [params random-prefix]
@@ -117,6 +123,7 @@
   (GET "/user/:user/:user-product" [user user-product] (user-product-page user user-product))
   (GET "/" request (home-page request))
 
+  (GET "/shuffle" request (shuffle-page request))
   ;; for anything else, you need to be logged in.
   (POST "/" request   (check-oauth (save-message! request)))
   (POST "/user/:user" [user :as request] (check-oauth (save-message! request))
