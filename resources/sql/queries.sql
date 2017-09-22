@@ -73,3 +73,12 @@ SET name = :name,
     producturl = :producturl,
     imageurl = :imageurl
 WHERE id = :id
+
+-- :name update-thing-without-picture! :! :*
+-- :doc UPDATEs a thing
+UPDATE things
+SET name = :name,
+description = :description,
+askingprice = :askingprice,
+producturl = :producturl
+WHERE id = :id

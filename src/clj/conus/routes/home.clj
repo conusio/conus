@@ -97,7 +97,9 @@
         fixed-params   (fix-params params random-prefix)
         updated-map    (select-keys fixed-params [:name :description :askingprice :producturl :imageurl])
         _              (upload-file-helper! fixed-params random-prefix)]
-    (db/update-thing! (conj updated-map id))))
+    (if (:imageurl updated-map)
+      (db/update-thing! (conj updated-map id))
+      (db/update-thing-without-picture! (conj updated-map id)))))
 
 (defn about-page []
   (layout/render "about.html"))
