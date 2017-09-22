@@ -75,10 +75,15 @@ SET name = :name,
 WHERE id = :id
 
 -- :name update-thing-without-picture! :! :*
--- :doc UPDATEs a thing
-UPDATE things
-SET name = :name,
+-- :doc updates a thing
+update things
+set name = :name,
 description = :description,
 askingprice = :askingprice,
 producturl = :producturl
-WHERE id = :id
+where id = :id
+
+-- :name delete-thing! :! :*
+-- :doc updates a thing
+delete from things
+where id = :id

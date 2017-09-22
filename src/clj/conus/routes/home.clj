@@ -101,6 +101,18 @@
       (db/update-thing! (conj updated-map id))
       (db/update-thing-without-picture! (conj updated-map id)))))
 
+
+(defn delete-thing! [{:keys [params] :as request}]
+  (let [id             {:id  (Integer. (:id params))}
+        random-prefix  (str (rand-int 1000000) "-conus-")
+        fixed-params   (fix-params params random-prefix)
+        updated-map    (select-keys fixed-params [:name :description :askingprice :producturl :imageurl])
+        _              (upload-file-helper! fixed-params random-prefix)]
+    (db/delete-thing! id)
+    #_(if (:imageurl updated-map)
+      (db/update-thing! (conj updated-map id))
+      (db/update-thing-without-picture! (conj updated-map id)))))
+
 (defn about-page []
   (layout/render "about.html"))
 
@@ -132,7 +144,9 @@
   (POST "/user/:user" [user :as request] (check-oauth (save-message! request))
         (redirect (str "/user/" user)))
   (POST "/user/:user/:user-product-page" [user-product-page user :as request] (check-oauth (update-message! request))
-        (redirect (str "/user/" user #_"/" #_user-product-page)))
+        (redirect (str "/user/" user)))
+  (POST "/user/:user/:user-product-page/delete" [user-product-page user :as request] (check-oauth (delete-thing! request))
+        (redirect (str "/user/" user)))
   (GET "/user" request (check-oauth (user-list)))
   (GET "/user/:user" [user]  (check-oauth (user-page user)))
   (POST "/upload" [file]
