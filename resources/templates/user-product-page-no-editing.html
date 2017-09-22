@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<table class="tablesorter">
+    <thead>
+        <tr>
+            <th>{{user}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>{{thing.name}}</td>
+            <td>{{thing.description}}</td>
+            <td>{{thing.askingprice}}</td>
+            <td><a href="{{thing.producturl}}">product link</a></td>
+
+            <td><img src="{{thing.imageurl}}" style="width:540px;height:auto"></td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

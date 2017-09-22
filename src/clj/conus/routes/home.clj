@@ -91,6 +91,21 @@
          (assoc fixed-params :owner (get-owner request) :timestamp (java.util.Date.)))
         (response/found "/")))))
 
+(defn update-message! [{:keys [params] :as request}]
+  (let [id             {:id  (Integer. (:id params))}
+        random-prefix  (str (rand-int 1000000) "-conus-")
+        fixed-params   (fix-params params random-prefix)
+        updated-map    (select-keys fixed-params [:name :description :askingprice :producturl :imageurl])
+        _              (upload-file-helper! fixed-params random-prefix)]
+    (if (:imageurl updated-map)
+      (db/update-thing! (conj updated-map id))
+      (db/update-thing-without-picture! (conj updated-map id)))))
+
+
+(defn delete-thing! [{:keys [params] :as request}]
+  (let [id             {:id  (Integer. (:id params))}]
+    (db/delete-thing! id)))
+
 (defn about-page []
   (layout/render "about.html"))
 
@@ -100,12 +115,18 @@
 
 (defn user-page [user]
   (layout/render "user-page.html"
-                 {:messages (db/get-things-by-owner {:owner (:id  (db/get-owner-from-login {:login user}))}) :user user :email user})) ;; TODO fix messy logic through table join
+                 {:messages (db/get-things-by-owner {:login user}) :user user :email user}))
 
 
-(defn user-product-page [user user-product]
-  (layout/render "user-product-page.html"
-                 {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product}))
+(defn user-product-page [user user-product request]
+  (if (:ignore-http env)
+    (layout/render "user-product-page.html"
+                   {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product})
+    (if (= {:id (get-owner request)} (db/get-id-from-login {:login user}))
+      (layout/render "user-product-page.html"
+                     {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product})
+      (layout/render "user-product-page-no-editing.html"
+                     {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product}))))
 
 (defn check-oauth [page]
   (if (:ignore-http env)
@@ -114,12 +135,16 @@
 
 (defroutes home-routes
   ;; you can view the home page, and view and share links to products without being logged in.
-  (GET "/user/:user/:user-product" [user user-product] (user-product-page user user-product))
+  (GET "/user/:user/:user-product" [user user-product :as request] (user-product-page user user-product request))
   (GET "/" request (home-page request))
 
   ;; for anything else, you need to be logged in.
   (POST "/" request   (check-oauth (save-message! request)))
   (POST "/user/:user" [user :as request] (check-oauth (save-message! request))
+        (redirect (str "/user/" user)))
+  (POST "/user/:user/:user-product-page" [user-product-page user :as request] (check-oauth (update-message! request))
+        (redirect (str "/user/" user)))
+  (POST "/user/:user/:user-product-page/delete" [user-product-page user :as request] (check-oauth (delete-thing! request))
         (redirect (str "/user/" user)))
   (GET "/user" request (check-oauth (user-list)))
   (GET "/user/:user" [user]  (check-oauth (user-page user)))
