@@ -84,6 +84,6 @@ producturl = :producturl
 where id = :id
 
 -- :name delete-thing! :! :*
--- :doc updates a thing
+-- :doc deletes a thing
 delete from things
 where id = :id

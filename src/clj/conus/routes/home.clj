@@ -103,15 +103,8 @@
 
 
 (defn delete-thing! [{:keys [params] :as request}]
-  (let [id             {:id  (Integer. (:id params))}
-        random-prefix  (str (rand-int 1000000) "-conus-")
-        fixed-params   (fix-params params random-prefix)
-        updated-map    (select-keys fixed-params [:name :description :askingprice :producturl :imageurl])
-        _              (upload-file-helper! fixed-params random-prefix)]
-    (db/delete-thing! id)
-    #_(if (:imageurl updated-map)
-      (db/update-thing! (conj updated-map id))
-      (db/update-thing-without-picture! (conj updated-map id)))))
+  (let [id             {:id  (Integer. (:id params))}]
+    (db/delete-thing! id)))
 
 (defn about-page []
   (layout/render "about.html"))
