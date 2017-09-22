@@ -118,9 +118,15 @@
                  {:messages (db/get-things-by-owner {:login user}) :user user :email user}))
 
 
-(defn user-product-page [user user-product]
-  (layout/render "user-product-page.html"
-                 {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product}))
+(defn user-product-page [user user-product request]
+  (if (:ignore-http env)
+    (layout/render "user-product-page.html"
+                   {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product})
+    (if (= {:id (get-owner request)} (db/get-id-from-login {:login user}))
+      (layout/render "user-product-page.html"
+                     {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product})
+      (layout/render "user-product-page-no-editing.html"
+                     {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product}))))
 
 (defn check-oauth [page]
   (if (:ignore-http env)
@@ -129,7 +135,7 @@
 
 (defroutes home-routes
   ;; you can view the home page, and view and share links to products without being logged in.
-  (GET "/user/:user/:user-product" [user user-product] (user-product-page user user-product))
+  (GET "/user/:user/:user-product" [user user-product :as request] (user-product-page user user-product request))
   (GET "/" request (home-page request))
 
   ;; for anything else, you need to be logged in.

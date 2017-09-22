@@ -29,6 +29,11 @@ VALUES (:name, :githubid, :email, :login, :location, :timestamp)
 -- :doc get all users
 SELECT * from users
 
+-- :name get-id-from-login :? :1
+-- :doc get the user's id from the user's login
+SELECT id from users
+where login = :login
+
 -- :name get-owner-from-login :? :1
 SELECT id from users
 where login = :login
