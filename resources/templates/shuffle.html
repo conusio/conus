@@ -10,7 +10,7 @@
 
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-
+        <link href="css/masonry.css" rel="stylesheet">
         <link href="css/custom.css" rel="stylesheet">
 
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,26 +23,55 @@
         <![endif]-->
     </head>
     <body>
+        <nav class="navbar navbar-default">
+            <!-- https://getbootstrap.com/docs/3.3/components/#navbar-default -->
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">conus</a>
+                </div>
 
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/user">users<span class="sr-only">(current)</span></a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
 
         <section class="portfolio">
             <div class="container">
                 <div class="row">
 
-                    <ul class="portfolio-sorting list-inline text-center">
-                        <li><a href="#" data-group="all" class="active">All</a></li>
-                        <li><a href="#" data-group="people">People</a></li>
-                        <li><a href="#" data-group="simpsons">Simpsons</a></li>
-                        <li><a href="#" data-group="futurama">Futurama</a></li>
-                    </ul> <!--end portfolio sorting -->
-
                     <ul class="portfolio-items list-unstyled" id="grid">
-{% for item in messages %}
+                      {% for item in messages %}
                         <li class="col-md-4 col-sm-4 col-xs-6" data-groups='["people"]'>
                             <figure class="portfolio-item">
-                                <a href="#">
+                                <a href="user/{{item.login}}/{{item.name}}">
                                     <img src="{{item.imageurl|default:default.png}}" alt="Item 1" class="img-responsive">
                                 </a>
+                                <div class="bottom-left">
+                                    <a href="user/{{item.login}}">
+
+                                        <h3>
+                                            <span>
+                                                {{item.login}} : 
+                                    </a>
+                                    <a href="user/{{item.login}}/{{item.name}}">
+                                            <span>
+                                                {{item.name}}
+                                            </span>
+                                        </h3>
+                                    </a>
+                                </div>
+
                             </figure>
                         </li>
                         {% endfor %}
@@ -60,7 +89,7 @@
         <script src="js/bootstrap.min.js"></script>
 
 
-        <script src="js/jquery.shuffle.min.js"></script>
+       <script src="js/jquery.shuffle.min.js"></script>
         <script src="js/custom.js"></script>
     </body>
 </html>
