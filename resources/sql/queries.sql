@@ -100,3 +100,9 @@ from things
 inner join users on things.owner = users.id
 where things.description like :tag
 or things.name like :tag
+
+-- :name add-aal! :! :n
+-- :doc add aal
+update things
+set aal = :aal
+where id = :id

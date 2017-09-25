@@ -119,14 +119,25 @@
 
 
 (defn user-product-page [user user-product request]
-  (if (:ignore-http env)
-    (layout/render "user-product-page.html"
-                   {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product})
-    (if (= {:id (get-owner request)} (db/get-id-from-login {:login user}))
+  (let [params {:thing (db/get-thing-by-login-and-name {:login user :name user-product})
+                :user user
+                :name user-product}
+        owner (get-owner request)]
+    (if (:ignore-http env)
       (layout/render "user-product-page.html"
-                     {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product})
-      (layout/render "user-product-page-no-editing.html"
-                     {:thing (db/get-thing-by-login-and-name {:login user :name user-product}) :user user :name user-product}))))
+                     params)
+      (if (= {:id owner}
+             (db/get-id-from-login {:login user}))
+        (if (#{1 2} owner)
+          (layout/render "user-product-page-with-aal-editing.html"
+                         params)
+          (layout/render "user-product-page.html"
+                         params))
+        (if (#{1 2} owner)
+          (layout/render "user-product-page-no-editing-with-aal-editing.html"
+                         params)
+          (layout/render "user-product-page-no-editing.html"
+                         params))))))
 
 (defn check-oauth [page]
   (if (:ignore-http env)
@@ -137,6 +148,9 @@
   (layout/render "tagged-things.html"
                  {:things (encode-urls (db/get-things-from-description {:tag (str "%" tag "%")}))}))
 
+(defn add-aal!  [{:keys [params] :as request}]
+  (db/add-aal! {:id (:id params) :aal (:aal params)}))
+
 (defroutes home-routes
   ;; you can view the home page, and view and share links to products without being logged in.
   (GET "/user/:user/:user-product" [user user-product :as request] (user-product-page user user-product request))
@@ -144,6 +158,9 @@
   (GET "/tag/:tag" [tag :as request] (tags tag))
 
   ;; for anything else, you need to be logged in.
+  (POST "/aal" request (add-aal! request)
+        (redirect "/"))
+
   (POST "/" request   (check-oauth (save-message! request)))
   (POST "/user/:user" [user :as request] (check-oauth (save-message! request))
         (redirect (str "/user/" user)))
