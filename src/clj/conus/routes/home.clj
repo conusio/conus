@@ -25,12 +25,6 @@
     (merge {:messages (encode-urls (reverse (take-last 40 (sort-by :timestamp (db/get-for-home-page)))))}
            (select-keys flash [:name :message :errors]))))
 
-(defn shuffle-page [{:keys [flash]}]
-  (let [_ (log/info (db/get-for-home-page))])
-  (layout/render
-   "shuffle.html"
-   (merge {:messages (encode-urls (reverse (take-last 40 (sort-by :timestamp (db/get-for-home-page)))))}
-          (select-keys flash [:name :message :errors]))))
 (def message-schema
   [#_[:name st/required st/string]
    #_[:message
