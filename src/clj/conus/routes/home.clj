@@ -135,7 +135,7 @@
 
 (defn tags [tag]
   (layout/render "tagged-things.html"
-                 {:things (db/get-things-from-description {:tag (str "%" tag "%")})}))
+                 {:things (encode-urls (db/get-things-from-description {:tag (str "%" tag "%")}))}))
 
 (defroutes home-routes
   ;; you can view the home page, and view and share links to products without being logged in.
