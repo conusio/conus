@@ -27,7 +27,7 @@
             <tr>
                 <td><img src="{{item.imageurl|default:default.png}}"></td>
                 <td>{{item.timestamp|date:"yyyy-MM-dd HH:mm"}}</td>
-                <td><a href="/{{user}}/{{item.name}}">{{item.name}}</a></td>
+                <td><a href="/user/{{item.login}}/{{item.name}}">{{item.name}}</a></td>
                 <td>{{item.description}}</td>
                 <td>{{item.askingprice}}</td>
                 <td><a href="{{item.producturl}}"><span class="affiliate">{{item.producturl}}</span></a></td>

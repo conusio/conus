@@ -95,5 +95,8 @@ where id = :id
 
 -- :name get-things-from-description :? :*
 -- returns a list of things matching a word in description
-select * from things
-where description like :tag
+SELECT users.login, things.name, things.description, things.imageurl, things.producturl, things.askingprice, things.timestamp
+from things
+inner join users on things.owner = users.id
+where things.description like :tag
+or things.name like :tag
