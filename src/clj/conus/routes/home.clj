@@ -116,8 +116,6 @@
   ;; you can view the home page, and view and share links to products without being logged in.
   (GET "/user/:user/:user-product" [user user-product] (user-product-page user user-product))
   (GET "/" request (home-page request))
-
-  (GET "/shuffle" request (shuffle-page request))
   ;; for anything else, you need to be logged in.
   (POST "/" request   (check-oauth (save-message! request)))
   (POST "/user/:user" [user :as request] (check-oauth (save-message! request))
