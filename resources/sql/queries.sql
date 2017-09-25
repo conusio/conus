@@ -92,3 +92,8 @@ where id = :id
 -- :doc deletes a thing
 delete from things
 where id = :id
+
+-- :name get-things-from-description :? :*
+-- returns a list of things matching a word in description
+select * from things
+where description like :tag

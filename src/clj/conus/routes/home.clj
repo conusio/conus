@@ -133,10 +133,15 @@
     page
     (friend/authorize #{:conus.middleware/user} page)))
 
+(defn tags [tag]
+  (layout/render "tagged-things.html"
+                 {:things (db/get-things-from-description {:tag (str "%" tag "%")})}))
+
 (defroutes home-routes
   ;; you can view the home page, and view and share links to products without being logged in.
   (GET "/user/:user/:user-product" [user user-product :as request] (user-product-page user user-product request))
   (GET "/" request (home-page request))
+  (GET "/tag/:tag" [tag :as request] (tags tag))
 
   ;; for anything else, you need to be logged in.
   (POST "/" request   (check-oauth (save-message! request)))
