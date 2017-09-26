@@ -38,7 +38,7 @@
         (update :port #(or (-> env :options :port) %)))
     (if (:ignore-http env)
       {}
-      {:port         nil          ;disables access on HTTP port
+      {:port         80          ;; needed for redirecting to https
        :ssl-port     (:port ssl-options)
        :keystore     (keystore (:keystore ssl-options) (:keystore-password ssl-options))
        :key-password (:keystore-password ssl-options)})))

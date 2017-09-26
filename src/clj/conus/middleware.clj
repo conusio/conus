@@ -5,6 +5,7 @@
             [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
             [ring.middleware.webjars :refer [wrap-webjars]]
             [ring.middleware.format :refer [wrap-restful-format]]
+            [ring.middleware.ssl :refer [wrap-ssl-redirect]]
             [conus.config :refer [env]]
             [ring.middleware.flash :refer [wrap-flash]]
             [immutant.web.middleware :refer [wrap-session]]
@@ -135,14 +136,27 @@
       ((if (:websocket? request) handler wrapped) request))))
 
 (defn wrap-base [handler]
-  (-> ((:middleware defaults) handler)
-      wrap-auth-user-and-save-to-db!
-      wrap-webjars
-      wrap-flash
-      (wrap-session {:cookie-attrs {:http-only true}})
-      (wrap-defaults
-        (-> site-defaults
-            (assoc-in [:security :anti-forgery] false)
-            (dissoc :session)))
-      wrap-context
-      wrap-internal-error))
+  (if (:ignore-http env)
+    (-> ((:middleware defaults) handler)
+        wrap-auth-user-and-save-to-db!
+        wrap-webjars
+        wrap-flash
+        (wrap-session {:cookie-attrs {:http-only true}})
+        (wrap-defaults
+         (-> site-defaults
+             (assoc-in [:security :anti-forgery] false)
+             (dissoc :session)))
+        wrap-context
+        wrap-internal-error)
+    (-> ((:middleware defaults) handler)
+        wrap-auth-user-and-save-to-db!
+        wrap-ssl-redirect
+        wrap-webjars
+        wrap-flash
+        (wrap-session {:cookie-attrs {:http-only true}})
+        (wrap-defaults
+         (-> site-defaults
+             #_(assoc-in [:security :anti-forgery] false)
+             #_(dissoc :session)))
+        wrap-context
+        wrap-internal-error)))
