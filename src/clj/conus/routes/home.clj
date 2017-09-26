@@ -128,12 +128,12 @@
                      params)
       (if (= {:id owner}
              (db/get-id-from-login {:login user}))
-        (if (#{1 2} owner)
+        (if (#{1 2 3 5} owner)
           (layout/render "user-product-page-with-aal-editing.html"
                          params)
           (layout/render "user-product-page.html"
                          params))
-        (if (#{1 2} owner)
+        (if (#{1 2 3 5} owner)
           (layout/render "user-product-page-no-editing-with-aal-editing.html"
                          params)
           (layout/render "user-product-page-no-editing.html"
