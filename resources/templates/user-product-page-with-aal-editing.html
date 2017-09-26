@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<table class="tablesorter">
+    <thead>
+        <tr>
+            <th>{{user}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>{{thing.name}}</td>
+            <td>{{thing.description}}</td>
+            <td>{{thing.askingprice}}</td>
+            <td><a href="{{thing.producturl}}">product link</a></td>
+
+            <td><img src="{{thing.imageurl}}" style="width:540px;height:auto"></td>
+        </tr>
+    </tbody>
+</table>
+
+<form method="POST" enctype="multipart/form-data" action="/aal">
+    {% csrf-field %}
+<input class="form-control"
+               type="text"
+               name="aal"
+       value="{{thing.aal}}"/>
+
+<input type="hidden" value="{{thing.id}}" name="id"></input>
+
+    <input type="submit" class="btn btn-primary" value="add aal"/>
+
+</form>
+
+<form method="POST" enctype="multipart/form-data" action="/user/{{user}}/{{thing.name}}">
+    {% csrf-field %}
+    <p>
+        Name:
+        <input class="form-control"
+               type="text"
+               name="name"
+               value="{{name}}" />
+    </p>
+    {% if errors.name %}
+    <div class="alert alert-danger">{{errors.name|join}}</div>
+    {% endif %}
+    <p>
+        Description:
+        <textarea class="form-control"
+                  rows="4"
+                  cols="50"
+                  name="description">{{thing.description}}</textarea>
+    </p>
+    {% if errors.description %}
+    <div class="alert alert-danger">{{errors.description|join}}</div>
+    {% endif %}
+
+    <p>
+        Askingprice:
+        <input type="number" value="{{thing.askingprice}}" name="askingprice"></input>
+    </p>
+    {% if errors.askingprice %}
+    <div class="alert alert-danger">{{errors.askingprice|join}}</div>
+    {% endif %}
+
+    <p>
+        Product url:
+        <textarea class="form-control"
+                  type="text"
+                  name="producturl">{{thing.producturl}}</textarea>
+    </p>
+    {% if errors.producturl %}
+    <div class="alert alert-danger">{{errors.producturl|join}}</div>
+    {% endif %}
+
+    <p>
+
+        Image:
+        <input id="file" name="file" type="file"/>
+
+    </p>
+    {% if errors.imageurl %}
+    <div class="alert alert-danger">{{errors.imageurl|join}}</div>
+    {% endif %}
+    <input type="hidden" value="{{thing.id}}" name="id"></input>
+    <input type="submit" class="btn btn-primary" value="submit" />
+    <p/>
+</form>
+
+<form method="POST" enctype="multipart/form-data" action="/user/{{user}}/{{thing.name}}/delete">
+    {% csrf-field %}
+    <input type="hidden"  value="{{thing.id}}" name="id"/>
+    <input type="submit" class="btn btn-primary" value="delete"/>
+</form>
+    There's no "undo"; edit wisely!
+
+{% endblock %}

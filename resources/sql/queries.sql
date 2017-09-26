@@ -92,3 +92,26 @@ where id = :id
 -- :doc deletes a thing
 delete from things
 where id = :id
+
+-- :name get-things-from-description :? :*
+-- returns a list of things matching a word in description
+SELECT users.login, things.name, things.description, things.imageurl, things.producturl, things.askingprice, things.timestamp
+from things
+inner join users on things.owner = users.id
+where things.description like :tag
+or things.name like :tag
+
+-- :name get-things-from-description-and-login :? :*
+-- returns a list of things matching a word in description
+SELECT users.login, things.name, things.description, things.imageurl, things.producturl, things.askingprice, things.timestamp
+from things
+inner join users on things.owner = users.id
+where (things.description like :tag
+or things.name like :tag)
+and users.login = :login
+
+-- :name add-aal! :! :n
+-- :doc add aal
+update things
+set aal = :aal
+where id = :id
