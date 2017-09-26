@@ -144,9 +144,13 @@
     page
     (friend/authorize #{:conus.middleware/user} page)))
 
-(defn tags [tag]
-  (layout/render "tagged-things.html"
-                 {:things (encode-urls (db/get-things-from-description {:tag (str "%" tag "%")}))}))
+(defn tags
+  ([tag]
+   (layout/render "tagged-things.html"
+                  {:things (encode-urls (db/get-things-from-description {:tag (str "%" tag "%")}))}))
+  ([tag user]
+   (layout/render "tagged-things.html"
+                  {:things (encode-urls (db/get-things-from-description-and-login {:tag (str "%" tag "%") :login user}))})))
 
 (defn add-aal!  [{:keys [params] :as request}]
   (db/add-aal! {:id (:id params) :aal (:aal params)}))
@@ -156,6 +160,7 @@
   (GET "/user/:user/:user-product" [user user-product :as request] (user-product-page user user-product request))
   (GET "/" request (home-page request))
   (GET "/tag/:tag" [tag :as request] (tags tag))
+  (GET "/user/:user/tag/:tag" [tag user :as request] (tags tag user))
 
   ;; for anything else, you need to be logged in.
   (POST "/aal" request (add-aal! request)
