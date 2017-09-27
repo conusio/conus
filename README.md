@@ -45,3 +45,8 @@ to have the app reload the queries.sql file, inside of `conus.db.core`, eval
 (conman/bind-connection *db* "sql/queries.sql")
 ```
 (when you're running the app via `lein repl`)
+
+## chrome redirects localhost:3000 to https when developing
+
+[this worked for me](https://superuser.com/a/869739). "empty cache and hard reload."
+
