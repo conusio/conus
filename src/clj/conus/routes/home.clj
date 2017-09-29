@@ -44,29 +44,17 @@
   [path {:keys [tempfile size filename]} random-prefix]
   (io/copy tempfile (io/file (str path random-prefix filename))))
 
-#_(defn upload-file!
-  "uploads a file to the target folder
-   when :create-path? flag is set to true then the target path will be created"
-  [path {:keys [tempfile size filename]} random-prefix]
-  (try
-    (log/info "path is " path
-              "tempfile is " tempfile
-              "filename is " filename)
-    (with-open [in (new FileInputStream tempfile)
-                out (new FileOutputStream (file-path path (str random-prefix filename)))]
-      (let [source (.getChannel in)
-            dest   (.getChannel out)]
-        (.transferFrom dest source 0 (.size source))
-        (.flush out)))))
-
 (defn validate-message [params]
   (first
     (st/validate params message-schema)))
 
 (defn fix-params [params random-prefix]
   (as-> params $
-    (assoc $ :imageurl (if (not (empty? (get-in params [:file :filename]))) (str "/images/" random-prefix (get-in params [:file :filename]))))
-    (assoc $ :name (clojure.string/trim (:name $)))))
+    (assoc $ :imageurl (if (not (empty? (get-in params [:file :filename])))
+                         (str "/images/" random-prefix (get-in params [:file :filename]))))
+    (assoc $ :name (if (not (empty? (clojure.string/trim (:name $))))
+                     (clojure.string/trim (:name $))
+                     (str random-prefix "untitled")))))
 
 (defn upload-file-helper! [params random-prefix]
   (when (not= "" (get-in params [:file :filename])) (upload-file! resource-path (:file params) random-prefix)))
@@ -174,10 +162,4 @@
   (POST "/user/:user/:user-product-page/delete" [user-product-page user :as request] (check-oauth (delete-thing! request))
         (redirect (str "/user/" user)))
   (GET "/user" request (check-oauth (user-list)))
-  (GET "/user/:user" [user]  (check-oauth (user-page user)))
-  (POST "/upload" [file]
-        (check-oauth  (upload-file! resource-path file))
-        (check-oauth (redirect (str "/anything/" (:filename file)))))
-  (GET "/anything/:filename" [filename]
-       (let [_  (log/info "file-response: " (file-response (str resource-path filename)))])
-       (check-oauth (file-response (str resource-path filename)))))
+  (GET "/user/:user" [user]  (check-oauth (user-page user))))
