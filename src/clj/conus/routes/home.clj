@@ -11,7 +11,8 @@
             [cemerick.url :as url]
             [cemerick.friend :as friend]
             [conus.config :refer [env]]
-            [taoensso.timbre :as timbre])
+            [taoensso.timbre :as timbre]
+            [clojure.java.shell :as sh])
   (:import [java.io File FileInputStream FileOutputStream]))
 
 (defn encode-urls [items]
