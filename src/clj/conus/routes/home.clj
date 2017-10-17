@@ -143,6 +143,11 @@
 (defn add-aal!  [{:keys [params] :as request}]
   (db/add-aal! {:id (:id params) :aal (:aal params)}))
 
+(defn getsparket [phone-number]
+  (let [_ (log/info "user's phone number is:" phone-number)
+        tel (str "1" phone-number)]
+    (log/info (sh/sh "curl" "-X" "POST" "https://api.textit.in/api/v2/flow_starts.json" "-H" "Authorization: Token 33ef96da6873c297b90d80e96804b6f2386cbae1" "-H" "Content-Type: application/json" "-d" (str  "{\"flow\":\"6fec2b99-aa82-4728-9e89-883c46d11b1d\",\"urns\":[\"tel:" tel "\"]}")))))
+
 (defroutes home-routes
   ;; you can view the home page, and view and share links to products without being logged in.
   (GET "/user/:user/:user-product" [user user-product :as request] (user-product-page user user-product request))
@@ -162,4 +167,6 @@
   (POST "/user/:user/:user-product-page/delete" [user-product-page user :as request] (check-oauth (delete-thing! request))
         (redirect (str "/user/" user)))
   (GET "/user" request (check-oauth (user-list)))
-  (GET "/user/:user" [user]  (check-oauth (user-page user))))
+  (GET "/user/:user" [user]  (check-oauth (user-page user)))
+  (POST "/getsparket" [query] (getsparket query)
+        (redirect "http://getsparket.com")))
