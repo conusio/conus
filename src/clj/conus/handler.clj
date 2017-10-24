@@ -1,7 +1,7 @@
 (ns conus.handler
   (:require [compojure.core :refer [routes wrap-routes]]
             [conus.layout :refer [error-page]]
-            [conus.routes.home :refer [home-routes]]
+            [conus.routes.home :refer [home-routes service-routes]]
             [compojure.route :as route]
             [conus.env :refer [defaults]]
             [mount.core :as mount]
@@ -18,6 +18,8 @@
         (friend/authenticate conus.middleware/auth-opts)
         (wrap-routes middleware/wrap-csrf)
         (wrap-routes middleware/wrap-formats))
+   (-> #'service-routes
+       (wrap-routes middleware/wrap-formats))
     (route/not-found
       (:body
         (error-page {:status 404

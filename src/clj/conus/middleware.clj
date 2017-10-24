@@ -156,7 +156,7 @@
         (wrap-session {:cookie-attrs {:http-only true}})
         (wrap-defaults
          (-> site-defaults
-             #_(assoc-in [:security :anti-forgery] false)
-             #_(dissoc :session)))
+             (assoc-in [:security :anti-forgery] false)
+             (dissoc :session)))
         wrap-context
         wrap-internal-error)))

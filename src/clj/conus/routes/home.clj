@@ -168,6 +168,8 @@
   (POST "/user/:user/:user-product-page/delete" [user-product-page user :as request] (check-oauth (delete-thing! request))
         (redirect (str "/user/" user)))
   (GET "/user" request (check-oauth (user-list)))
-  (GET "/user/:user" [user]  (check-oauth (user-page user)))
-  (POST "/getsparket" [query] (getsparket query)
-        (redirect "http://getsparket.com")))
+  (GET "/user/:user" [user]  (check-oauth (user-page user))))
+
+(defroutes service-routes
+(POST "/getsparket" [query] (getsparket query)
+        (redirect "https://getsparket.com")))
