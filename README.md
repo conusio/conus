@@ -38,6 +38,22 @@ sudo -E java -cp target/uberjar/conus.jar:resources conus.core &
 # & is for running asynchronously, so the job runs in the background
 ```
 
+## updated (jan 25 2018) deploying to production (though the old way will still work)
+
+to deploy the jar, assuming you've _already_ setcap'd:
+
+```bash
+nohup java -cp target/uberjar/conus.jar:resources conus.core &
+```
+
+to setcap:
+```bash
+sudo setcap CAP_NET_BIND_SERVICE=+eip /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+```
+
+(see notes in the spendgap slack, administrivia channel, for details). also stackoverflow: https://superuser.com/a/892391 )
+
+
 ## making changes to queries.sql
 
 to have the app reload the queries.sql file, inside of `conus.db.core`, eval
